@@ -1,0 +1,7 @@
+{
+  "name": "SmartVin",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular-standalone"
+}
