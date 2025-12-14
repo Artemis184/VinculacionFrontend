@@ -65,14 +65,15 @@ README.md
 
 ## 🔐 Variables de Entorno
 
-Crea un archivo `src/environments/environment.ts` con el siguiente contenido (y ajusta para producción en `environment.prod.ts`):
+Crea un archivo `.env` en la raíz del proyecto con el siguiente contenido:
 
-```typescript
-export const environment = {
-  production: false,
-  apiUrl: 'http://localhost:3000/api'  // URL del backend
-};
+```env
+API_URL=http://localhost:3000/api
+URL_LOGO=https://example.com/logo.png
+API_TIMEOUT=60000
 ```
+
+Los archivos de environment se generan automáticamente desde `.env` al ejecutar `npm start` o `npm run build`. No es necesario ejecutar comandos manuales.
 
 ---
 
@@ -93,7 +94,7 @@ npm install
 ```bash
 npm start
 # o
-ionic serve
+npm run serve
 ```
 
 Esto iniciará el servidor de desarrollo en `http://localhost:8100`.
@@ -136,7 +137,8 @@ ionic capacitor run ios
 
 | Script             | Descripción                            |
 | ------------------ | -------------------------------------- |
-| `npm start`        | Ejecuta el servidor en modo desarrollo |
+| `npm start`        | Ejecuta el servidor en modo desarrollo (Angular) |
+| `npm run serve`    | Ejecuta el servidor en modo desarrollo (Ionic) |
 | `npm run build`    | Compila el proyecto para producción    |
 | `npm run watch`    | Compila y observa cambios              |
 | `npm test`         | Ejecuta las pruebas unitarias          |
