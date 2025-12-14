@@ -6,7 +6,7 @@ export const environment = {
   production: false,
   apiUrl: 'https://localhost:3005/api',
   urlLogo: 'https://dev.assets.example.com/logo.png',
-  apiTimeout: 60000
+  apiTimeout: 60000,
 };
 
 /*
