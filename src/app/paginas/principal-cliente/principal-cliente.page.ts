@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import {
@@ -15,7 +15,7 @@ import {
   IonCard,
   IonCardHeader,
   IonCardTitle,
-  IonCardContent
+  IonCardContent,
 } from '@ionic/angular/standalone';
 
 import { LoginService } from '../../servicios/login.service';
@@ -40,11 +40,10 @@ import { LoginService } from '../../servicios/login.service';
     IonCard,
     IonCardHeader,
     IonCardTitle,
-    IonCardContent
-  ]
+    IonCardContent,
+  ],
 })
 export class PrincipalClientePage {
-
   menuVisible = false;
 
   // nodos de ejemplo (luego los llenas desde tu API)
@@ -54,7 +53,7 @@ export class PrincipalClientePage {
     { nombre: 'Alarma Bodega', estado: 'Activa' },
   ];
 
-  constructor(private loginService: LoginService) {}
+  private loginService = inject(LoginService);
 
   toggleMenu() {
     this.menuVisible = !this.menuVisible;

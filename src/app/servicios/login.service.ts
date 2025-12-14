@@ -1,21 +1,19 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { Router } from '@angular/router';
 
 export type UserRole = 'final' | 'admin';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class LoginService {
-
   private loggedIn = false;
   private userRole: UserRole | null = null;
 
-  constructor(private router: Router) {}
+  private router = inject(Router);
 
   login(username: string, password: string): Promise<UserRole> {
     return new Promise((resolve, reject) => {
-
       // LOGIN SIMULADO para TEST
       if (username === 'admin' && password === '123') {
         this.loggedIn = true;
@@ -28,7 +26,6 @@ export class LoginService {
       } else {
         reject('Credenciales incorrectas');
       }
-
     });
   }
 

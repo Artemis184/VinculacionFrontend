@@ -1,9 +1,8 @@
 import { inject } from '@angular/core';
 import { CanActivateFn, Router } from '@angular/router';
-import { LoginService } from './login.service';  // MISMA CARPETA
+import { LoginService } from './login.service'; // MISMA CARPETA
 
 export const AutentiGuard: CanActivateFn = (route, state) => {
-
   const auth = inject(LoginService);
   const router = inject(Router);
 
@@ -15,7 +14,8 @@ export const AutentiGuard: CanActivateFn = (route, state) => {
   const userRole = auth.getRole();
 
   if (expectedRole && userRole !== expectedRole) {
-    if (userRole === 'admin') return router.parseUrl('/principal-administrador');
+    if (userRole === 'admin')
+      return router.parseUrl('/principal-administrador');
     if (userRole === 'final') return router.parseUrl('/principal-cliente');
     return router.parseUrl('/login');
   }
