@@ -1,0 +1,34 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Mis Alarmas</ion-title>
+
+    <!-- Botón hamburguesa arriba a la derecha -->
+    <ion-buttons slot="end">
+      <ion-button (click)="toggleMenu()">
+        <ion-icon name="menu-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+
+  <ion-card *ngFor="let nodo of nodosAsignados">
+    <ion-card-header>
+      <ion-card-title>{{ nodo.nombre }}</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      Estado: <b>{{ nodo.estado }}</b>
+    </ion-card-content>
+  </ion-card>
+
+  <!-- Menú pequeño que aparece debajo -->
+  <ion-list *ngIf="menuVisible" class="ion-margin-top">
+    <ion-item button (click)="verDatosUsuario()">
+      <ion-label>Datos de Usuario</ion-label>
+    </ion-item>
+    <ion-item button (click)="logout()">
+      <ion-label>Logout</ion-label>
+    </ion-item>
+  </ion-list>
+</ion-content>
