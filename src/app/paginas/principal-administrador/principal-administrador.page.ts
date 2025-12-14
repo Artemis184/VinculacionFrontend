@@ -17,7 +17,7 @@ import {
   IonCardContent,
   IonList,
   IonItem,
-  IonLabel
+  IonLabel,
 } from '@ionic/angular/standalone';
 
 @Component({
@@ -42,15 +42,15 @@ import {
     IonCardContent,
     IonList,
     IonItem,
-    IonLabel
-  ]
+    IonLabel,
+  ],
 })
 export class PrincipalAdministradorPage {
-
   // Datos de ejemplo para el dashboard
   promedioActivaciones = 3.4;
   totalAlarmas = 12;
   alarmasActivas = 8;
+  //HOLA
 
   activacionesPorAlarma = [
     { nombre: 'Alarma Casa', promedio: 4.2 },

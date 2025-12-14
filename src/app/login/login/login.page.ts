@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 
@@ -11,7 +11,7 @@ import {
   IonLabel,
   IonInput,
   IonButton,
-  IonText
+  IonText,
 } from '@ionic/angular/standalone';
 
 import { LoginService } from '../../servicios/login.service';
@@ -31,32 +31,31 @@ import { LoginService } from '../../servicios/login.service';
     IonInput,
     IonButton,
     IonText,
-    FormsModule
-  ]
+    FormsModule,
+  ],
 })
 export class LoginPage {
-
   username = '';
   password = '';
   errorMessage = '';
 
-  constructor(
-    private loginService: LoginService,
-    private router: Router
-  ) {}
+  // ✅ Inyección con inject()
+  private loginService = inject(LoginService);
+  private router = inject(Router);
 
   onLogin() {
     this.errorMessage = '';
 
-    this.loginService.login(this.username, this.password)
-      .then(role => {
+    this.loginService
+      .login(this.username, this.password)
+      .then((role) => {
         if (role === 'admin') {
           this.router.navigate(['/principal-administrador']);
         } else {
           this.router.navigate(['/principal-cliente']);
         }
       })
-      .catch(err => {
+      .catch((err) => {
         this.errorMessage = err;
       });
   }

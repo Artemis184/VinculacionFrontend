@@ -12,14 +12,11 @@
 </ion-header>
 
 <ion-content class="ion-padding">
-
   <ion-card *ngFor="let nodo of nodosAsignados">
     <ion-card-header>
       <ion-card-title>{{ nodo.nombre }}</ion-card-title>
     </ion-card-header>
-    <ion-card-content>
-      Estado: <b>{{ nodo.estado }}</b>
-    </ion-card-content>
+    <ion-card-content> Estado: <b>{{ nodo.estado }}</b> </ion-card-content>
   </ion-card>
 
   <!-- Menú pequeño que aparece debajo -->

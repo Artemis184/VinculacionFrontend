@@ -9,7 +9,7 @@ export const routes: Routes = [
     redirectTo: 'login',
     pathMatch: 'full',
   },
-/*{
+  /*{
     path: 'principal-cliente',
     loadComponent: () => import('./paginas/principal-cliente/principal-cliente.page').then( m => m.PrincipalClientePage)
   },
@@ -19,15 +19,19 @@ export const routes: Routes = [
   },*/
   {
     path: 'login',
-    loadComponent: () => import('./login/login/login.page').then( m => m.LoginPage)
+    loadComponent: () =>
+      import('./login/login/login.page').then((m) => m.LoginPage),
   },
-  
+
   // USUARIO FINAL
   {
     path: 'principal-cliente',
     canActivate: [AutentiGuard],
     data: { role: 'final' },
-    loadComponent: () =>import('./paginas/principal-cliente/principal-cliente.page').then(m => m.PrincipalClientePage)
+    loadComponent: () =>
+      import('./paginas/principal-cliente/principal-cliente.page').then(
+        (m) => m.PrincipalClientePage,
+      ),
   },
 
   // ADMIN
@@ -35,6 +39,9 @@ export const routes: Routes = [
     path: 'principal-administrador',
     canActivate: [AutentiGuard],
     data: { role: 'admin' },
-    loadComponent: () =>import('./paginas/principal-administrador/principal-administrador.page').then(m => m.PrincipalAdministradorPage)
+    loadComponent: () =>
+      import('./paginas/principal-administrador/principal-administrador.page').then(
+        (m) => m.PrincipalAdministradorPage,
+      ),
   },
 ];
