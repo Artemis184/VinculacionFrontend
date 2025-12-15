@@ -1,0 +1,16 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Solicitudes</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <ion-list>
+    <ion-item *ngFor="let s of solicitudes">
+      <ion-label>
+        <h2>#{{ s.id }} - {{ s.asunto }}</h2>
+        <p>Estado: {{ s.estado }}</p>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+</ion-content>

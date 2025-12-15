@@ -1,68 +1,119 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-buttons slot="start">
-      <!-- menú lateral con id "adminMenu" -->
-      <ion-menu-button menu="adminMenu"></ion-menu-button>
-    </ion-buttons>
+<!-- MENÚ LATERAL -->
+<ion-menu contentId="adminContent" side="start" menuId="adminMenu" type="overlay">
+  <ion-content class="menu-content">
+    <div class="menu-box">
+      <ion-list lines="none">
 
-    <ion-title>Dashboard Admin</ion-title>
-  </ion-toolbar>
-</ion-header>
+        <ion-menu-toggle autoHide="true">
+          <ion-item button class="menu-item" (click)="irSolicitudes()">
+            <ion-label>Solicitudes</ion-label>
+            <ion-badge class="badge">{{ solicitudesCount }}</ion-badge>
+          </ion-item>
+        </ion-menu-toggle>
 
-<ion-content class="ion-padding">
-  <!-- Cards de resumen -->
-  <ion-grid>
-    <ion-row>
-      <ion-col size="12" size-md="4">
-        <ion-card>
-          <ion-card-header>
-            <ion-card-title>Promedio activaciones</ion-card-title>
-          </ion-card-header>
-          <ion-card-content>
-            <h2>{{ promedioActivaciones | number:'1.1-1' }}</h2>
-            <p>por alarma</p>
-          </ion-card-content>
-        </ion-card>
-      </ion-col>
+        <ion-menu-toggle autoHide="true">
+          <ion-item button class="menu-item" (click)="irUsuarios()">
+            <ion-label>Lista de usuarios</ion-label>
+            <span class="arrow">›</span>
+          </ion-item>
+        </ion-menu-toggle>
 
-      <ion-col size="12" size-md="4">
-        <ion-card>
-          <ion-card-header>
-            <ion-card-title>Total de alarmas</ion-card-title>
-          </ion-card-header>
-          <ion-card-content>
-            <h2>{{ totalAlarmas }}</h2>
-          </ion-card-content>
-        </ion-card>
-      </ion-col>
+        <ion-menu-toggle autoHide="true">
+          <ion-item button class="menu-item" (click)="irAlarmas()">
+            <ion-label>Lista de Alarmas</ion-label>
+            <span class="arrow">›</span>
+          </ion-item>
+        </ion-menu-toggle>
 
-      <ion-col size="12" size-md="4">
-        <ion-card>
-          <ion-card-header>
-            <ion-card-title>Alarmas activas</ion-card-title>
-          </ion-card-header>
-          <ion-card-content>
-            <h2>{{ alarmasActivas }}</h2>
-          </ion-card-content>
-        </ion-card>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
+        <ion-menu-toggle autoHide="true">
+          <ion-item button class="menu-item" (click)="irAuditoria()">
+            <ion-label>Auditoría Activaciones</ion-label>
+            <span class="arrow">›</span>
+          </ion-item>
+        </ion-menu-toggle>
 
-  <!-- Lista de promedio por alarma -->
-  <ion-card>
-    <ion-card-header>
-      <ion-card-title>Promedio por alarma</ion-card-title>
-    </ion-card-header>
-    <ion-card-content>
-      <ion-list>
-        <ion-item *ngFor="let alarma of activacionesPorAlarma">
-          <ion-label>
-            <h2>{{ alarma.nombre }}</h2>
-            <p>Promedio: {{ alarma.promedio | number:'1.1-1' }}</p>
-          </ion-label>
-        </ion-item>
       </ion-list>
-    </ion-card-content>
-  </ion-card>
-</ion-content>
+    </div>
+  </ion-content>
+</ion-menu>
+
+<!-- CONTENIDO PRINCIPAL -->
+<div id="adminContent" class="page-shell">
+
+  <ion-header>
+    <ion-toolbar>
+      <ion-buttons slot="start">
+        <ion-menu-button menu="adminMenu"></ion-menu-button>
+      </ion-buttons>
+
+      <ion-title>Dashboard Admin</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-content fullscreen="true" class="ion-padding">
+    <!-- BOTÓN AUTOASIGNADO -->
+    <ion-card class="auto-card" (click)="ejecutarBotonAutoasignado()">
+      <ion-card-content>
+        <div class="auto-btn">{{ botonAutoasignado.texto }}</div>
+      </ion-card-content>
+    </ion-card>
+
+    <!-- Cards de resumen -->
+    <ion-grid>
+      <ion-row>
+        <ion-col size="12" size-md="4">
+          <ion-card>
+            <ion-card-header>
+              <ion-card-title>Promedio activaciones</ion-card-title>
+            </ion-card-header>
+            <ion-card-content>
+              <h2>{{ promedioActivaciones | number:'1.1-1' }}</h2>
+              <p>por alarma</p>
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+
+        <ion-col size="12" size-md="4">
+          <ion-card>
+            <ion-card-header>
+              <ion-card-title>Total de alarmas</ion-card-title>
+            </ion-card-header>
+            <ion-card-content>
+              <h2>{{ totalAlarmas }}</h2>
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+
+        <ion-col size="12" size-md="4">
+          <ion-card>
+            <ion-card-header>
+              <ion-card-title>Alarmas activas</ion-card-title>
+            </ion-card-header>
+            <ion-card-content>
+              <h2>{{ alarmasActivas }}</h2>
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
+    <!-- Lista de promedio por alarma -->
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>Promedio por alarma</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <ion-list>
+          <ion-item *ngFor="let alarma of activacionesPorAlarma">
+            <ion-label>
+              <h2>{{ alarma.nombre }}</h2>
+              <p>Promedio: {{ alarma.promedio | number:'1.1-1' }}</p>
+            </ion-label>
+          </ion-item>
+        </ion-list>
+      </ion-card-content>
+    </ion-card>
+
+    <div style="height: 40px;"></div>
+  </ion-content>
+</div>

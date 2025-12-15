@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
 
 import {
   IonContent,
@@ -8,6 +9,11 @@ import {
   IonTitle,
   IonButtons,
   IonMenuButton,
+  IonMenu,
+  IonList,
+  IonItem,
+  IonLabel,
+  IonBadge,
   IonGrid,
   IonRow,
   IonCol,
@@ -15,9 +21,7 @@ import {
   IonCardHeader,
   IonCardTitle,
   IonCardContent,
-  IonList,
-  IonItem,
-  IonLabel,
+  IonMenuToggle,
 } from '@ionic/angular/standalone';
 
 @Component({
@@ -33,6 +37,14 @@ import {
     IonTitle,
     IonButtons,
     IonMenuButton,
+
+    IonMenu,
+    IonList,
+    IonItem,
+    IonLabel,
+    IonBadge,
+    IonMenuToggle,
+
     IonGrid,
     IonRow,
     IonCol,
@@ -40,21 +52,55 @@ import {
     IonCardHeader,
     IonCardTitle,
     IonCardContent,
-    IonList,
-    IonItem,
-    IonLabel,
   ],
 })
 export class PrincipalAdministradorPage {
-  // Datos de ejemplo para el dashboard
+  private router = inject(Router);
+
   promedioActivaciones = 3.4;
   totalAlarmas = 12;
   alarmasActivas = 8;
-  //HOLA
 
   activacionesPorAlarma = [
     { nombre: 'Alarma Casa', promedio: 4.2 },
     { nombre: 'Alarma Oficina', promedio: 3.1 },
     { nombre: 'Alarma Bodega', promedio: 2.7 },
   ];
+
+  botonAutoasignado = { texto: 'Botón autoasignado', accion: 'VER_ALARMAS' };
+
+  solicitudes = [
+    { id: 1, estado: 'Pendiente' },
+    { id: 2, estado: 'Pendiente' },
+    { id: 3, estado: 'Pendiente' },
+  ];
+
+  get solicitudesCount(): number {
+    return this.solicitudes.length;
+  }
+
+  // ✅ YA NO alerts: NAVEGA a pantallas
+  irSolicitudes() {
+    this.router.navigate(['/admin-solicitudes']);
+  }
+
+  irUsuarios() {
+    this.router.navigate(['/admin-usuarios']);
+  }
+
+  irAlarmas() {
+    this.router.navigate(['/admin-alarmas']);
+  }
+
+  irAuditoria() {
+    alert('Auditoría Activaciones (opcional)');
+  }
+
+  ejecutarBotonAutoasignado() {
+    if (this.botonAutoasignado.accion === 'VER_ALARMAS') {
+      this.router.navigate(['/admin-alarmas']);
+    } else {
+      alert('Acción no definida');
+    }
+  }
 }

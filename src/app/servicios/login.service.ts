@@ -14,7 +14,6 @@ export class LoginService {
 
   login(username: string, password: string): Promise<UserRole> {
     return new Promise((resolve, reject) => {
-      // LOGIN SIMULADO para TEST
       if (username === 'admin' && password === '123') {
         this.loggedIn = true;
         this.userRole = 'admin';
