@@ -39,7 +39,6 @@ export class LoginPage {
   password = '';
   errorMessage = '';
 
-  // ✅ Inyección con inject()
   private loginService = inject(LoginService);
   private router = inject(Router);
 
@@ -49,11 +48,8 @@ export class LoginPage {
     this.loginService
       .login(this.username, this.password)
       .then((role) => {
-        if (role === 'admin') {
-          this.router.navigate(['/principal-administrador']);
-        } else {
-          this.router.navigate(['/principal-cliente']);
-        }
+        if (role === 'admin') this.router.navigate(['/principal-administrador']);
+        else this.router.navigate(['/principal-cliente']);
       })
       .catch((err) => {
         this.errorMessage = err;
