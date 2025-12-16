@@ -94,7 +94,7 @@ npm install
 ```bash
 npm start
 # o
-npm run serve
+ionic serve
 ```
 
 Esto iniciará el servidor de desarrollo en `http://localhost:8100`.
@@ -138,7 +138,7 @@ ionic capacitor run ios
 | Script             | Descripción                            |
 | ------------------ | -------------------------------------- |
 | `npm start`        | Ejecuta el servidor en modo desarrollo (Angular) |
-| `npm run serve`    | Ejecuta el servidor en modo desarrollo (Ionic) |
+| `ionic serve`    | Ejecuta el servidor en modo desarrollo (Ionic) |
 | `npm run build`    | Compila el proyecto para producción    |
 | `npm run watch`    | Compila y observa cambios              |
 | `npm test`         | Ejecuta las pruebas unitarias          |
