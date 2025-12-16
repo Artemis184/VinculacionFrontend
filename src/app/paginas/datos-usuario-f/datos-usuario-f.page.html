@@ -1,0 +1,59 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Datos de usuario</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <!-- FOTO DE PERFIL -->
+  <div class="ion-text-center ion-margin-bottom">
+    <ion-avatar style="margin: auto; width: 120px; height: 120px">
+      <img [src]="usuario.foto || 'assets/img/default.png'" />
+    </ion-avatar>
+  </div>
+
+  <!-- FOTO (URL) -->
+  <ion-item>
+    <ion-label position="stacked">Foto de perfil (URL)</ion-label>
+    <ion-input [(ngModel)]="usuario.foto"></ion-input>
+  </ion-item>
+
+  <!-- TELÉFONO -->
+  <ion-item>
+    <ion-label position="stacked">Teléfono</ion-label>
+    <ion-input
+      type="tel"
+      maxlength="10"
+      inputmode="numeric"
+      [(ngModel)]="usuario.telefono"
+    >
+    </ion-input>
+  </ion-item>
+
+  <!-- CONTRASEÑA -->
+  <ion-item>
+    <ion-label position="stacked">Nueva contraseña</ion-label>
+    <ion-input type="password" [(ngModel)]="nuevaPassword"> </ion-input>
+  </ion-item>
+
+  <!-- BOTÓN GUARDAR -->
+  <ion-button
+    expand="block"
+    class="ion-margin-top"
+    [disabled]="!hayCambios()"
+    (click)="guardarCambios()"
+  >
+    Guardar cambios
+  </ion-button>
+
+  <!-- BOTÓN SALIR -->
+  <ion-button
+    expand="block"
+    fill="outline"
+    color="medium"
+    class="ion-margin-top"
+    (click)="salir()"
+  >
+    Salir
+  </ion-button>
+</ion-content>
