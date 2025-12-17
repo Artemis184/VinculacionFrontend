@@ -1,6 +1,5 @@
-import { Component, inject } from '@angular/core';
+import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Router } from '@angular/router';
 
 import {
   IonContent,
@@ -14,14 +13,11 @@ import {
   IonItem,
   IonLabel,
   IonBadge,
-  IonGrid,
-  IonRow,
-  IonCol,
-  IonCard,
-  IonCardHeader,
-  IonCardTitle,
-  IonCardContent,
   IonMenuToggle,
+  IonCard,
+  IonCardContent,
+  IonButton,
+  IonIcon,
 } from '@ionic/angular/standalone';
 
 @Component({
@@ -37,70 +33,70 @@ import {
     IonTitle,
     IonButtons,
     IonMenuButton,
-
     IonMenu,
     IonList,
     IonItem,
     IonLabel,
     IonBadge,
     IonMenuToggle,
-
-    IonGrid,
-    IonRow,
-    IonCol,
     IonCard,
-    IonCardHeader,
-    IonCardTitle,
     IonCardContent,
+    IonButton,
+    IonIcon,
   ],
 })
 export class PrincipalAdministradorPage {
-  private router = inject(Router);
 
-  promedioActivaciones = 3.4;
-  totalAlarmas = 12;
-  alarmasActivas = 8;
+  cuentaVisible = false;
 
-  activacionesPorAlarma = [
-    { nombre: 'Alarma Casa', promedio: 4.2 },
-    { nombre: 'Alarma Oficina', promedio: 3.1 },
-    { nombre: 'Alarma Bodega', promedio: 2.7 },
-  ];
+  toggleCuenta() {this.cuentaVisible = !this.cuentaVisible;}
 
-  botonAutoasignado = { texto: 'Botón autoasignado', accion: 'VER_ALARMAS' };
+  verCuenta() {this.cuentaVisible = false;
+    alert('Cuenta (demo)');}
+
+  logout() {this.cuentaVisible = false;
+    alert('Logout (demo)');
+  }
 
   solicitudes = [
     { id: 1, estado: 'Pendiente' },
     { id: 2, estado: 'Pendiente' },
     { id: 3, estado: 'Pendiente' },
+    { id: 4, estado: 'Pendiente' },
   ];
 
   get solicitudesCount(): number {
     return this.solicitudes.length;
   }
 
-  // ✅ YA NO alerts: NAVEGA a pantallas
-  irSolicitudes() {
-    this.router.navigate(['/admin-solicitudes']);
-  }
+  alarmasAsignadas = [
+    {
+      id: 1,
+      nombre: 'ALARMA # 001',
+      direccion: 'ENTRE CALLE XYZ, DIAGONAL A CASA A',
+      encendida: false,
+    },
+    {
+      id: 2,
+      nombre: 'ALARMA # 002',
+      direccion: 'CALLE 10, CASA 5',
+      encendida: true,
+    },
+    {
+      id: 3,
+      nombre: 'ALARMA # 003',
+      direccion: 'AV. PRINCIPAL, EDIF. A',
+      encendida: false,
+    },
+  ];
 
-  irUsuarios() {
-    this.router.navigate(['/admin-usuarios']);
+  toggleAlarma(alarma: any) {
+    alarma.encendida = !alarma.encendida;
   }
-
-  irAlarmas() {
-    this.router.navigate(['/admin-alarmas']);
+  
+  clickSolicitudes() {alert('Lista de solicitudes');}
+  clickUsuarios() {alert('Lista de usuarios finales ');}
+  clickAlarmas() {// ya estás en alarmas
   }
-
-  irAuditoria() {
-    alert('Auditoría Activaciones (opcional)');
-  }
-
-  ejecutarBotonAutoasignado() {
-    if (this.botonAutoasignado.accion === 'VER_ALARMAS') {
-      this.router.navigate(['/admin-alarmas']);
-    } else {
-      alert('Acción no definida');
-    }
-  }
+  clickAuditoria() {alert('Auditoría Activaciones');}
 }

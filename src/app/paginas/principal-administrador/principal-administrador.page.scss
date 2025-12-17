@@ -3,11 +3,15 @@
   display: flex;
   flex-direction: column;
 }
-
 .page-shell ion-content {
   flex: 1;
 }
 
+ion-title {
+  font-weight: 800;
+}
+
+/* MENÚ LATERAL */
 .menu-content {
   --background: transparent;
 }
@@ -26,12 +30,16 @@
   margin-bottom: 6px;
 }
 
+.menu-text {
+  font-weight: 700;
+}
+
 .badge {
   margin-left: auto;
   background: #d32f2f;
   color: #fff;
   border-radius: 999px;
-  font-weight: 700;
+  font-weight: 800;
   min-width: 22px;
   height: 22px;
   display: inline-flex;
@@ -45,21 +53,111 @@
   font-size: 18px;
 }
 
-.auto-card {
+/* ICONO PERFIL */
+.icon-btn ion-icon {
+  font-size: 30px;
+  color: #6a4aa8;
+}
+
+/* POPUP CUENTA */
+.account-popup {
+  position: absolute;
+  top: 58px;
+  right: 16px;
+  width: 170px;
+  background: #f6f1fb;
+  border-radius: 14px;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.18);
+  padding: 8px;
+  z-index: 999;
+}
+
+.account-item {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 12px;
+  border: none;
+  background: transparent;
+  border-radius: 12px;
+  font-weight: 700;
   cursor: pointer;
+}
+
+.account-item:hover {
+  background: rgba(0, 0, 0, 0.05);
+}
+
+.account-item.logout {
+  color: #b00020;
+}
+
+.mini-icon {
+  font-size: 18px;
+}
+
+/* ALARMAS */
+.alarma-card {
   margin-bottom: 14px;
 }
 
-.auto-btn {
-  width: 100%;
-  text-align: center;
-  padding: 14px;
-  border-radius: 14px;
-  background: #ece6f7;
-  font-weight: 800;
+.alarma-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 12px;
+  margin-bottom: 10px;
 }
 
-ion-card-title,
-ion-title {
-  font-weight: 800;
+.alarma-nombre {
+  font-weight: 900;
+  font-size: 18px;
 }
+
+.alarma-dir {
+  font-weight: 600;
+  font-size: 13px;
+  opacity: 0.85;
+}
+
+.estado-text {
+  font-weight: 900;
+  font-size: 14px;
+  padding: 6px 10px;
+  border-radius: 999px;
+  background: #6a4aa8;
+  color: white;
+}
+
+.estado-text.on {
+  background: #36c24c;
+}
+
+/* SWITCH */
+.switch {
+  width: 270px;
+  height: 120px;
+  border-radius: 70px;
+  margin: 6px auto 0;
+  background: #6a4aa8;
+  display: flex;
+  align-items: center;
+  padding: 14px;
+  transition: 0.2s;
+  cursor: pointer;
+}
+
+.switch.on {
+  background: #36c24c;
+  justify-content: flex-end;
+}
+
+.knob {
+  width: 92px;
+  height: 92px;
+  border-radius: 999px;
+  background: #d9d9d9;
+}
+
+
