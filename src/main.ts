@@ -25,7 +25,6 @@ addIcons({
   'menu-outline': menuOutline,
 });
 
-
 bootstrapApplication(AppComponent, {
   providers: [
     provideZoneChangeDetection(),

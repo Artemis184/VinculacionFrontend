@@ -46,15 +46,19 @@ import {
   ],
 })
 export class PrincipalAdministradorPage {
-
   cuentaVisible = false;
 
-  toggleCuenta() {this.cuentaVisible = !this.cuentaVisible;}
+  toggleCuenta() {
+    this.cuentaVisible = !this.cuentaVisible;
+  }
 
-  verCuenta() {this.cuentaVisible = false;
-    alert('Cuenta (demo)');}
+  verCuenta() {
+    this.cuentaVisible = false;
+    alert('Cuenta (demo)');
+  }
 
-  logout() {this.cuentaVisible = false;
+  logout() {
+    this.cuentaVisible = false;
     alert('Logout (demo)');
   }
 
@@ -93,10 +97,17 @@ export class PrincipalAdministradorPage {
   toggleAlarma(alarma: any) {
     alarma.encendida = !alarma.encendida;
   }
-  
-  clickSolicitudes() {alert('Lista de solicitudes');}
-  clickUsuarios() {alert('Lista de usuarios finales ');}
-  clickAlarmas() {// ya estás en alarmas
+
+  clickSolicitudes() {
+    alert('Lista de solicitudes');
   }
-  clickAuditoria() {alert('Auditoría Activaciones');}
+  clickUsuarios() {
+    alert('Lista de usuarios finales ');
+  }
+  clickAlarmas() {
+    // ya estás en alarmas
+  }
+  clickAuditoria() {
+    alert('Auditoría Activaciones');
+  }
 }
