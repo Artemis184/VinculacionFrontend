@@ -1,9 +1,13 @@
 <!-- MENÚ LATERAL -->
-<ion-menu contentId="adminContent" side="start" menuId="adminMenu" type="overlay">
+<ion-menu
+  contentId="adminContent"
+  side="start"
+  menuId="adminMenu"
+  type="overlay"
+>
   <ion-content class="menu-content">
     <div class="menu-box">
       <ion-list lines="none" class="menu-list">
-
         <ion-menu-toggle autoHide="true">
           <ion-item button class="menu-item" (click)="clickSolicitudes()">
             <ion-label class="menu-text">Solicitudes</ion-label>
@@ -31,7 +35,6 @@
             <span class="arrow">›</span>
           </ion-item>
         </ion-menu-toggle>
-
       </ion-list>
     </div>
   </ion-content>
@@ -39,7 +42,6 @@
 
 <!-- CONTENIDO PRINCIPAL -->
 <div id="adminContent" class="page-shell">
-
   <ion-header>
     <ion-toolbar>
       <ion-buttons slot="start">
@@ -58,7 +60,6 @@
   </ion-header>
 
   <ion-content fullscreen="true" class="ion-padding">
-
     <!-- ✅ POPUP CUENTA / LOGOUT -->
     <div class="account-popup" *ngIf="cuentaVisible">
       <button class="account-item" (click)="verCuenta()">
@@ -93,6 +94,6 @@
       </ion-card-content>
     </ion-card>
 
-    <div style="height: 40px;"></div>
+    <div style="height: 40px"></div>
   </ion-content>
 </div>

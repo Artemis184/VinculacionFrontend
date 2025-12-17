@@ -6,7 +6,7 @@ export const routes: Routes = [
     redirectTo: 'principal-administrador',
     pathMatch: 'full',
   },
-   {
+  {
     path: 'principal-administrador',
     loadComponent: () =>
       import('./paginas/principal-administrador/principal-administrador.page').then(
