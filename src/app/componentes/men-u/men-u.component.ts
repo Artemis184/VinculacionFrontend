@@ -1,7 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { IonContent, IonButton } from '@ionic/angular/standalone';
 import { Router } from '@angular/router';
-import { PopoverController } from '@ionic/angular';
+import { PopoverController, ToastController } from '@ionic/angular';
 
 @Component({
   selector: 'app-men-u',
@@ -14,18 +14,28 @@ export class MenUComponent {
   // ✅ Inyección moderna (Angular recomendado)
   private router = inject(Router);
   private popoverCtrl = inject(PopoverController);
+  private toastCtrl = inject(ToastController);
 
   irCuenta() {
-    this.popoverCtrl.dismiss(); // cierra el menú
+    this.popoverCtrl.dismiss();
     this.router.navigate(['/datos-usuario-f']);
   }
 
-  cerrarSesion() {
-    this.popoverCtrl.dismiss(); // cierra el menú
-    alert('Sesión cerrada');
+  async cerrarSesion() {
+    await this.popoverCtrl.dismiss();
+
+    const toast = await this.toastCtrl.create({
+      message: 'Sesión cerrada correctamente',
+      duration: 2000,
+      position: 'bottom',
+      color: 'medium',
+      icon: 'log-out-outline',
+    });
+
+    await toast.present();
   }
 
   cerrarMenu() {
-    this.popoverCtrl.dismiss(); // solo cierra el popover
+    this.popoverCtrl.dismiss();
   }
 }

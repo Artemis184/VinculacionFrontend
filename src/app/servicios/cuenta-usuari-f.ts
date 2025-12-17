@@ -13,7 +13,7 @@ export interface UsuarioFinal {
   providedIn: 'root',
 })
 export class CuentaUsuariF {
-  // Array de usuarios (simulado)
+  // Array simulado (usuario logueado)
   private usuarios: UsuarioFinal[] = [
     {
       id: 1,
@@ -25,23 +25,44 @@ export class CuentaUsuariF {
     },
   ];
 
-  // Obtener datos del usuario final
+  /** Usuario activo (seguro) */
+  private getUsuarioActivo(): UsuarioFinal | null {
+    return this.usuarios.length > 0 ? this.usuarios[0] : null;
+  }
+
+  /** Obtener usuario */
   getUsuario(): UsuarioFinal {
-    return this.usuarios[0]; // usuario final logueado
+    const usuario = this.getUsuarioActivo();
+    if (!usuario) {
+      throw new Error('No existe usuario activo');
+    }
+    return usuario;
   }
 
-  // Actualizar SOLO teléfono
-  actualizarTelefono(telefono: string) {
-    this.usuarios[0].telefono = telefono;
+  /** Actualizar teléfono */
+  actualizarTelefono(telefono: string): boolean {
+    const usuario = this.getUsuarioActivo();
+    if (!usuario) return false;
+
+    usuario.telefono = telefono;
+    return true;
   }
 
-  // Actualizar foto de perfil
-  actualizarFoto(foto: string) {
-    this.usuarios[0].foto = foto;
+  /** Actualizar foto */
+  actualizarFoto(foto: string): boolean {
+    const usuario = this.getUsuarioActivo();
+    if (!usuario) return false;
+
+    usuario.foto = foto;
+    return true;
   }
 
-  // Actualizar contraseña
-  actualizarPassword(password: string) {
-    this.usuarios[0].password = password;
+  /** Actualizar contraseña (SIMULADO) */
+  actualizarPassword(password: string): boolean {
+    const usuario = this.getUsuarioActivo();
+    if (!usuario) return false;
+
+    usuario.password = password;
+    return true;
   }
 }

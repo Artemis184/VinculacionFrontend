@@ -8,7 +8,10 @@
   <!-- FOTO DE PERFIL -->
   <div class="ion-text-center ion-margin-bottom">
     <ion-avatar style="margin: auto; width: 120px; height: 120px">
-      <img [src]="usuario.foto || 'assets/img/default.png'" />
+      <img
+        [src]="usuario.foto || 'assets/img/default.png'"
+        alt="Foto de perfil del usuario"
+      />
     </ion-avatar>
   </div>
 
@@ -33,14 +36,20 @@
   <!-- CONTRASEÑA -->
   <ion-item>
     <ion-label position="stacked">Nueva contraseña</ion-label>
-    <ion-input type="password" [(ngModel)]="nuevaPassword"> </ion-input>
+    <ion-input
+      type="password"
+      minlength="6"
+      placeholder="Mínimo 6 caracteres"
+      [(ngModel)]="nuevaPassword"
+    >
+    </ion-input>
   </ion-item>
 
   <!-- BOTÓN GUARDAR -->
   <ion-button
     expand="block"
     class="ion-margin-top"
-    [disabled]="!hayCambios()"
+    [disabled]="!hayCambios() || (nuevaPassword && nuevaPassword.length < 6)"
     (click)="guardarCambios()"
   >
     Guardar cambios

@@ -77,10 +77,6 @@ export class DatosUsuarioFPage implements OnInit {
     if (this.nuevaPassword.trim().length > 0) {
       this.cuentaService.actualizarPassword(this.nuevaPassword);
 
-      console.log(
-        '✅ Contraseña guardada:',
-        this.cuentaService.getUsuario().password,
-      );
       this.nuevaPassword = '';
     }
 
