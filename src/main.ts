@@ -6,13 +6,25 @@ import {
   withPreloading,
   PreloadAllModules,
 } from '@angular/router';
+
+import { routes } from './app/app.routes';
+import { AppComponent } from './app/app.component';
+
 import {
   IonicRouteStrategy,
   provideIonicAngular,
 } from '@ionic/angular/standalone';
 
-import { routes } from './app/app.routes';
-import { AppComponent } from './app/app.component';
+//SE AGREGO
+import { addIcons } from 'ionicons';
+import { personCircle, menuOutline } from 'ionicons/icons';
+
+// ✅ REGISTRA ICONOS (para que <ion-icon name="..."> se vea)
+addIcons({
+  'person-circle': personCircle,
+  'menu-outline': menuOutline,
+});
+
 
 bootstrapApplication(AppComponent, {
   providers: [

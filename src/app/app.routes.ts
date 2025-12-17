@@ -20,18 +20,11 @@ export const routes: Routes = [
         (m) => m.DatosUsuarioFPage,
       ),
   },
-
-  {
-    path: 'login',
-    loadComponent: () =>
-      import('./login/login/login.page').then((m) => m.LoginPage),
-  },
-
-  // ADMIN
-  {
+   {
+    path: 'principal-administrador',
     loadComponent: () =>
       import('./paginas/principal-administrador/principal-administrador.page').then(
-        (m) => m.PrincipalAdministradorPage,)
-      
-  }
+        (m) => m.PrincipalAdministradorPage,
+      ),
+  },
 ];

@@ -2,32 +2,32 @@
 <ion-menu contentId="adminContent" side="start" menuId="adminMenu" type="overlay">
   <ion-content class="menu-content">
     <div class="menu-box">
-      <ion-list lines="none">
+      <ion-list lines="none" class="menu-list">
 
         <ion-menu-toggle autoHide="true">
-          <ion-item button class="menu-item" (click)="irSolicitudes()">
-            <ion-label>Solicitudes</ion-label>
+          <ion-item button class="menu-item" (click)="clickSolicitudes()">
+            <ion-label class="menu-text">Solicitudes</ion-label>
             <ion-badge class="badge">{{ solicitudesCount }}</ion-badge>
           </ion-item>
         </ion-menu-toggle>
 
         <ion-menu-toggle autoHide="true">
-          <ion-item button class="menu-item" (click)="irUsuarios()">
-            <ion-label>Lista de usuarios</ion-label>
+          <ion-item button class="menu-item" (click)="clickUsuarios()">
+            <ion-label class="menu-text">Lista de usuarios</ion-label>
             <span class="arrow">›</span>
           </ion-item>
         </ion-menu-toggle>
 
         <ion-menu-toggle autoHide="true">
-          <ion-item button class="menu-item" (click)="irAlarmas()">
-            <ion-label>Lista de Alarmas</ion-label>
+          <ion-item button class="menu-item" (click)="clickAlarmas()">
+            <ion-label class="menu-text">Lista de Alarmas</ion-label>
             <span class="arrow">›</span>
           </ion-item>
         </ion-menu-toggle>
 
         <ion-menu-toggle autoHide="true">
-          <ion-item button class="menu-item" (click)="irAuditoria()">
-            <ion-label>Auditoría Activaciones</ion-label>
+          <ion-item button class="menu-item" (click)="clickAuditoria()">
+            <ion-label class="menu-text">Auditoria Activaciones</ion-label>
             <span class="arrow">›</span>
           </ion-item>
         </ion-menu-toggle>
@@ -46,71 +46,50 @@
         <ion-menu-button menu="adminMenu"></ion-menu-button>
       </ion-buttons>
 
-      <ion-title>Dashboard Admin</ion-title>
+      <ion-title>Alarmas asignadas</ion-title>
+
+      <!-- ✅ Ícono morado arriba (abre popup) -->
+      <ion-buttons slot="end">
+        <ion-button class="icon-btn" (click)="toggleCuenta()">
+          <ion-icon name="person-circle"></ion-icon>
+        </ion-button>
+      </ion-buttons>
     </ion-toolbar>
   </ion-header>
 
   <ion-content fullscreen="true" class="ion-padding">
-    <!-- BOTÓN AUTOASIGNADO -->
-    <ion-card class="auto-card" (click)="ejecutarBotonAutoasignado()">
+
+    <!-- ✅ POPUP CUENTA / LOGOUT -->
+    <div class="account-popup" *ngIf="cuentaVisible">
+      <button class="account-item" (click)="verCuenta()">
+        <span>Cuenta</span>
+        <span class="mini-icon">👤</span>
+      </button>
+
+      <button class="account-item logout" (click)="logout()">
+        <span>Logout</span>
+        <span class="mini-icon">↪</span>
+      </button>
+    </div>
+
+    <!-- ✅ LISTA DE ALARMAS (hacia abajo) -->
+    <ion-card class="alarma-card" *ngFor="let a of alarmasAsignadas">
       <ion-card-content>
-        <div class="auto-btn">{{ botonAutoasignado.texto }}</div>
-      </ion-card-content>
-    </ion-card>
+        <div class="alarma-top">
+          <div>
+            <div class="alarma-nombre">{{ a.nombre }}</div>
+            <div class="alarma-dir">{{ a.direccion }}</div>
+          </div>
 
-    <!-- Cards de resumen -->
-    <ion-grid>
-      <ion-row>
-        <ion-col size="12" size-md="4">
-          <ion-card>
-            <ion-card-header>
-              <ion-card-title>Promedio activaciones</ion-card-title>
-            </ion-card-header>
-            <ion-card-content>
-              <h2>{{ promedioActivaciones | number:'1.1-1' }}</h2>
-              <p>por alarma</p>
-            </ion-card-content>
-          </ion-card>
-        </ion-col>
+          <div class="estado-text" [class.on]="a.encendida">
+            {{ a.encendida ? 'ENCENDIDO' : 'APAGADO' }}
+          </div>
+        </div>
 
-        <ion-col size="12" size-md="4">
-          <ion-card>
-            <ion-card-header>
-              <ion-card-title>Total de alarmas</ion-card-title>
-            </ion-card-header>
-            <ion-card-content>
-              <h2>{{ totalAlarmas }}</h2>
-            </ion-card-content>
-          </ion-card>
-        </ion-col>
-
-        <ion-col size="12" size-md="4">
-          <ion-card>
-            <ion-card-header>
-              <ion-card-title>Alarmas activas</ion-card-title>
-            </ion-card-header>
-            <ion-card-content>
-              <h2>{{ alarmasActivas }}</h2>
-            </ion-card-content>
-          </ion-card>
-        </ion-col>
-      </ion-row>
-    </ion-grid>
-
-    <!-- Lista de promedio por alarma -->
-    <ion-card>
-      <ion-card-header>
-        <ion-card-title>Promedio por alarma</ion-card-title>
-      </ion-card-header>
-      <ion-card-content>
-        <ion-list>
-          <ion-item *ngFor="let alarma of activacionesPorAlarma">
-            <ion-label>
-              <h2>{{ alarma.nombre }}</h2>
-              <p>Promedio: {{ alarma.promedio | number:'1.1-1' }}</p>
-            </ion-label>
-          </ion-item>
-        </ion-list>
+        <!-- ✅ SWITCH -->
+        <div class="switch" [class.on]="a.encendida" (click)="toggleAlarma(a)">
+          <div class="knob"></div>
+        </div>
       </ion-card-content>
     </ion-card>
 
