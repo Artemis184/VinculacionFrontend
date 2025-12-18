@@ -1,6 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
+import { Router } from '@angular/router';
 import {
   IonContent,
   IonHeader,
@@ -46,6 +46,8 @@ import {
   ],
 })
 export class PrincipalAdministradorPage {
+  private router = inject(Router);
+
   cuentaVisible = false;
 
   toggleCuenta() {
@@ -105,7 +107,7 @@ export class PrincipalAdministradorPage {
     alert('Lista de usuarios finales ');
   }
   clickAlarmas() {
-    // ya estás en alarmas
+    this.router.navigate(['lista-alarmas']);
   }
   clickAuditoria() {
     alert('Auditoría Activaciones');
