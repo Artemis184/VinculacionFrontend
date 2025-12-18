@@ -20,11 +20,25 @@ export const routes: Routes = [
         (m) => m.DatosUsuarioFPage,
       ),
   },
-   {
+  {
     path: 'principal-administrador',
     loadComponent: () =>
       import('./paginas/principal-administrador/principal-administrador.page').then(
         (m) => m.PrincipalAdministradorPage,
+      ),
+  },
+  {
+    path: 'lista-alarmas',
+    loadComponent: () =>
+      import('./paginas/lista-alarmas/lista-alarmas.page').then(
+        (m) => m.ListaAlarmasPage,
+      ),
+  },
+  {
+    path: 'editar-alarma/:id',
+    loadComponent: () =>
+      import('./paginas/editar-alarma/editar-alarma.page').then(
+        (m) => m.EditarAlarmaPage,
       ),
   },
 ];
