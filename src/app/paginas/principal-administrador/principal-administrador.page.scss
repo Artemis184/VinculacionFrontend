@@ -3,6 +3,7 @@
   display: flex;
   flex-direction: column;
 }
+
 .page-shell ion-content {
   flex: 1;
 }
@@ -11,27 +12,71 @@ ion-title {
   font-weight: 800;
 }
 
-/* MENÚ LATERAL */
+:host {
+  --menu-bg: #f6f1fb;
+  --popup-bg: #f6f1fb;
+  --text-color: #111;
+  --muted-color: rgba(0, 0, 0, 0.6);
+  --shadow: 0 12px 30px rgba(0, 0, 0, 0.18);
+  --shadow-strong: 0 12px 30px rgba(0, 0, 0, 0.28);
+  --danger: #b00020;
+  --accent-purple: #6a4aa8;
+  --accent-green: #36c24c;
+}
+
+@media (prefers-color-scheme: dark) {
+  :host {
+    --menu-bg: #1f1f1f;
+    --popup-bg: #1f1f1f;
+    --text-color: #fff;
+    --muted-color: rgba(255, 255, 255, 0.6);
+    --shadow: 0 12px 30px rgba(0, 0, 0, 0.35);
+    --shadow-strong: 0 12px 30px rgba(0, 0, 0, 0.45);
+  }
+}
+
+ion-list {
+  --background: transparent !important;
+}
+
+ion-item {
+  --border-color: transparent !important;
+  --inner-border-width: 0 !important;
+  --border-width: 0 !important;
+}
+
+ion-item::part(native) {
+  border: 0 !important;
+}
+
 .menu-content {
-  --background: transparent;
+  --background: transparent !important;
+  background: transparent !important;
 }
 
 .menu-box {
   margin: 16px;
-  background: #f6f1fb;
+  background: var(--menu-bg) !important;
+  color: var(--text-color);
   border-radius: 16px;
-  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.18);
+  box-shadow: var(--shadow);
   padding: 8px;
+  border: none !important;
+  outline: none !important;
 }
 
 .menu-item {
-  --background: transparent;
+  --background: transparent !important;
   border-radius: 12px;
   margin-bottom: 6px;
+  border: 0 !important;
+  --background-hover: rgba(255, 255, 255, 0.06);
+  --background-activated: rgba(255, 255, 255, 0.08);
 }
 
 .menu-text {
   font-weight: 700;
+  color: var(--text-color) !important;
 }
 
 .badge {
@@ -49,27 +94,28 @@ ion-title {
 
 .arrow {
   margin-left: auto;
-  opacity: 0.6;
+  color: var(--muted-color) !important;
   font-size: 18px;
 }
 
-/* ICONO PERFIL */
 .icon-btn ion-icon {
   font-size: 30px;
-  color: #6a4aa8;
+  color: var(--accent-purple);
 }
 
-/* POPUP CUENTA */
 .account-popup {
   position: absolute;
   top: 58px;
   right: 16px;
   width: 170px;
-  background: #f6f1fb;
+  background: var(--popup-bg) !important;
+  color: var(--text-color) !important;
   border-radius: 14px;
-  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.18);
+  box-shadow: var(--shadow-strong);
   padding: 8px;
   z-index: 999;
+  border: none !important;
+  outline: none !important;
 }
 
 .account-item {
@@ -78,26 +124,33 @@ ion-title {
   justify-content: space-between;
   align-items: center;
   padding: 10px 12px;
-  border: none;
+  border: none !important;
+  outline: none !important;
   background: transparent;
   border-radius: 12px;
   font-weight: 700;
   cursor: pointer;
+  color: var(--text-color);
 }
 
 .account-item:hover {
   background: rgba(0, 0, 0, 0.05);
 }
 
+@media (prefers-color-scheme: dark) {
+  .account-item:hover {
+    background: rgba(255, 255, 255, 0.06);
+  }
+}
+
 .account-item.logout {
-  color: #b00020;
+  color: var(--danger);
 }
 
 .mini-icon {
   font-size: 18px;
 }
 
-/* ALARMAS */
 .alarma-card {
   margin-bottom: 14px;
 }
@@ -126,21 +179,20 @@ ion-title {
   font-size: 14px;
   padding: 6px 10px;
   border-radius: 999px;
-  background: #6a4aa8;
+  background: var(--accent-purple);
   color: white;
 }
 
 .estado-text.on {
-  background: #36c24c;
+  background: var(--accent-green);
 }
 
-/* SWITCH */
 .switch {
   width: 270px;
   height: 120px;
   border-radius: 70px;
   margin: 6px auto 0;
-  background: #6a4aa8;
+  background: var(--accent-purple);
   display: flex;
   align-items: center;
   padding: 14px;
@@ -149,7 +201,7 @@ ion-title {
 }
 
 .switch.on {
-  background: #36c24c;
+  background: var(--accent-green);
   justify-content: flex-end;
 }
 
