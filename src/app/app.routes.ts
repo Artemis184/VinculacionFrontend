@@ -2,12 +2,8 @@ import { Routes } from '@angular/router';
 
 export const routes: Routes = [
   {
-    path: 'home',
-    loadComponent: () => import('./home/home.page').then((m) => m.HomePage),
-  },
-  {
     path: '',
-    redirectTo: 'principal-usuariof',
+    redirectTo: 'principal-administrador',
     pathMatch: 'full',
   },
   {
@@ -22,6 +18,13 @@ export const routes: Routes = [
     loadComponent: () =>
       import('./paginas/datos-usuario-f/datos-usuario-f.page').then(
         (m) => m.DatosUsuarioFPage,
+      ),
+  },
+   {
+    path: 'principal-administrador',
+    loadComponent: () =>
+      import('./paginas/principal-administrador/principal-administrador.page').then(
+        (m) => m.PrincipalAdministradorPage,
       ),
   },
 ];
