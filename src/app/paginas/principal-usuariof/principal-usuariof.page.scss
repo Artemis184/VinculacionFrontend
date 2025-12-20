@@ -1,0 +1,58 @@
+/* CENTRAR TODO EN PANTALLA */
+.center-wrapper {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* CARD */
+.alarma-card {
+  width: 90%;
+  max-width: 360px;
+  border-radius: 18px;
+  text-align: center;
+}
+
+/* TEXTO */
+.alarma-nombre {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.alarma-direccion {
+  font-size: 14px;
+  color: #666;
+  margin-bottom: 20px;
+}
+
+/* SWITCH */
+.switch {
+  width: 70px;
+  height: 36px;
+  background: #ccc;
+  border-radius: 20px;
+  position: relative;
+  cursor: pointer;
+  margin: 0 auto;
+  transition: background 0.3s ease;
+}
+
+.switch.on {
+  background: #6a1b9a;
+}
+
+.knob {
+  width: 32px;
+  height: 32px;
+  background: #fff;
+  border-radius: 50%;
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  transition: left 0.3s ease;
+}
+
+.switch.on .knob {
+  left: 36px;
+}

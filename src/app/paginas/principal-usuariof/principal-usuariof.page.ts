@@ -14,16 +14,25 @@ import { MenUComponent } from '../../componentes/men-u/men-u.component';
   ],
 })
 export class PrincipalUsuariofPage implements OnInit {
-  // 🔥 INYECCIÓN MODERNA (SOLUCIÓN AL LINT)
+  // 🔥 INYECCIÓN MODERNA
   private cuentaService = inject(CuentaUsuariF);
   private popoverCtrl = inject(PopoverController);
 
   usuario!: UsuarioFinal;
 
+  // 🔴 ESTADO DE LA ALARMA
+  alarmaEncendida = false;
+
   ngOnInit() {
     this.usuario = this.cuentaService.getUsuario();
   }
 
+  // 🔘 SWITCH ON / OFF
+  toggleAlarma() {
+    this.alarmaEncendida = !this.alarmaEncendida;
+  }
+
+  // 📂 MENÚ
   async abrirMenu(ev: any) {
     const popover = await this.popoverCtrl.create({
       component: MenUComponent,
