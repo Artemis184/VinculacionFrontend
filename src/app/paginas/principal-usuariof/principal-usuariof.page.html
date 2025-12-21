@@ -4,14 +4,39 @@
     <ion-buttons slot="start">
       <ion-button (click)="abrirMenu($event)">
         <ion-avatar>
-          <img [src]="usuario.foto" alt="Foto de perfil del usuario" />
+          <img [src]="usuario.foto" alt="Foto de perfil" />
         </ion-avatar>
       </ion-button>
     </ion-buttons>
 
-    <!-- TÍTULO CENTRADO -->
-    <ion-title class="ion-text-center"> Bienvenido </ion-title>
+    <!-- TÍTULO -->
+    <ion-title class="ion-text-center">Bienvenido</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content></ion-content>
+<ion-content>
+  <!-- CONTENEDOR CENTRAL -->
+  <div class="center-wrapper">
+    <ion-card class="alarma-card">
+      <ion-card-content>
+        <!-- INFORMACIÓN DE LA ALARMA -->
+        <div class="alarma-info">
+          <div class="alarma-nombre">{{ alarma.nombre }}</div>
+          <div class="alarma-direccion">{{ alarma.direccion }}</div>
+        </div>
+
+        <!-- SWITCH (ACCESIBILIDAD INTERMEDIA) -->
+        <div
+          class="switch"
+          role="button"
+          tabindex="0"
+          [class.on]="alarma.encendida"
+          (click)="toggleAlarma()"
+          (keydown.enter)="toggleAlarma()"
+        >
+          <div class="knob"></div>
+        </div>
+      </ion-card-content>
+    </ion-card>
+  </div>
+</ion-content>

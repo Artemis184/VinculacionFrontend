@@ -1,0 +1,70 @@
+/* =========================
+   CENTRADO EN PANTALLA
+========================= */
+.center-wrapper {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* =========================
+   TARJETA
+========================= */
+.alarma-card {
+  width: 90%;
+  max-width: 420px;
+  border-radius: 20px;
+  text-align: center;
+  padding: 10px;
+}
+
+/* =========================
+   TEXTO
+========================= */
+.alarma-nombre {
+  font-size: 22px;
+  font-weight: 700;
+}
+
+.alarma-direccion {
+  font-size: 14px;
+  color: #666;
+  margin-bottom: 24px;
+}
+
+/* =========================
+   SWITCH (UNIFICADO CON ADMIN)
+========================= */
+.switch {
+  width: 270px;
+  height: 120px;
+  background: #d1d1d1;
+  border-radius: 80px;
+  position: relative;
+  cursor: pointer;
+  margin: 0 auto;
+  transition: background 0.3s ease;
+}
+
+/* SWITCH ENCENDIDO */
+.switch.on {
+  background: #19d638;
+}
+
+/* BOTÓN INTERNO */
+.knob {
+  width: 100px;
+  height: 100px;
+  background: #ffffff;
+  border-radius: 50%;
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  transition: left 0.3s ease;
+}
+
+/* POSICIÓN ENCENDIDO */
+.switch.on .knob {
+  left: 160px;
+}

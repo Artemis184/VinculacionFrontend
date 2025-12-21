@@ -14,16 +14,41 @@ import { MenUComponent } from '../../componentes/men-u/men-u.component';
   ],
 })
 export class PrincipalUsuariofPage implements OnInit {
-  // 🔥 INYECCIÓN MODERNA (SOLUCIÓN AL LINT)
+  // 🔥 INYECCIÓN MODERNA
   private cuentaService = inject(CuentaUsuariF);
   private popoverCtrl = inject(PopoverController);
 
   usuario!: UsuarioFinal;
 
+  // 🔔 ALARMA ASIGNADA AL USUARIO (UI)
+  alarma = {
+    id: 1,
+    nombre: 'ALARMA #001',
+    direccion: 'ENTRE LA CALLE XYZ, DIAGONAL A LA CASA',
+    encendida: false,
+  };
+
   ngOnInit() {
+    // Carga del usuario
     this.usuario = this.cuentaService.getUsuario();
+
+    // Sincroniza estado UI
+    this.alarma.encendida = this.alarma.encendida;
+
+    // 🔌 FUTURO:
+    // cargar alarma desde backend según usuario
   }
 
+  // 🔘 SWITCH ON / OFF
+  toggleAlarma() {
+    this.alarma.encendida = !this.alarma.encendida;
+
+    // 🔌 FUTURO:
+    // enviar estado al backend / IoT
+    // ejemplo: alarmaService.cambiarEstado(this.alarma)
+  }
+
+  // 📂 MENÚ DE USUARIO
   async abrirMenu(ev: any) {
     const popover = await this.popoverCtrl.create({
       component: MenUComponent,
