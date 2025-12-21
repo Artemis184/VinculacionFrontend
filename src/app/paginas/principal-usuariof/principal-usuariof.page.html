@@ -1,5 +1,6 @@
 <ion-header>
   <ion-toolbar>
+    <!-- FOTO USUARIO -->
     <ion-buttons slot="start">
       <ion-button (click)="abrirMenu($event)">
         <ion-avatar>
@@ -8,6 +9,7 @@
       </ion-button>
     </ion-buttons>
 
+    <!-- TÍTULO -->
     <ion-title class="ion-text-center">Bienvenido</ion-title>
   </ion-toolbar>
 </ion-header>
@@ -17,19 +19,20 @@
   <div class="center-wrapper">
     <ion-card class="alarma-card">
       <ion-card-content>
-        <!-- TEXTO -->
+        <!-- INFORMACIÓN DE LA ALARMA -->
         <div class="alarma-info">
-          <div class="alarma-nombre">ALARMA #001</div>
-          <div class="alarma-direccion">
-            ENTRE LA CALLE XYZ, DIAGONAL A LA CASA
-          </div>
+          <div class="alarma-nombre">{{ alarma.nombre }}</div>
+          <div class="alarma-direccion">{{ alarma.direccion }}</div>
         </div>
 
-        <!-- SWITCH (VISIBLE SIEMPRE) -->
+        <!-- SWITCH (ACCESIBILIDAD INTERMEDIA) -->
         <div
           class="switch"
-          [class.on]="alarmaEncendida"
+          role="button"
+          tabindex="0"
+          [class.on]="alarma.encendida"
           (click)="toggleAlarma()"
+          (keydown.enter)="toggleAlarma()"
         >
           <div class="knob"></div>
         </div>

@@ -1,4 +1,6 @@
-/* CENTRAR TODO EN PANTALLA */
+/* =========================
+   CENTRADO EN PANTALLA
+========================= */
 .center-wrapper {
   height: 100%;
   display: flex;
@@ -6,53 +8,63 @@
   align-items: center;
 }
 
-/* CARD */
+/* =========================
+   TARJETA
+========================= */
 .alarma-card {
   width: 90%;
-  max-width: 360px;
-  border-radius: 18px;
+  max-width: 420px;
+  border-radius: 20px;
   text-align: center;
+  padding: 10px;
 }
 
-/* TEXTO */
+/* =========================
+   TEXTO
+========================= */
 .alarma-nombre {
-  font-size: 20px;
-  font-weight: bold;
+  font-size: 22px;
+  font-weight: 700;
 }
 
 .alarma-direccion {
   font-size: 14px;
   color: #666;
-  margin-bottom: 20px;
+  margin-bottom: 24px;
 }
 
-/* SWITCH */
+/* =========================
+   SWITCH (UNIFICADO CON ADMIN)
+========================= */
 .switch {
-  width: 70px;
-  height: 36px;
-  background: #ccc;
-  border-radius: 20px;
+  width: 270px;
+  height: 120px;
+  background: #d1d1d1;
+  border-radius: 80px;
   position: relative;
   cursor: pointer;
   margin: 0 auto;
   transition: background 0.3s ease;
 }
 
+/* SWITCH ENCENDIDO */
 .switch.on {
   background: #6a1b9a;
 }
 
+/* BOTÓN INTERNO */
 .knob {
-  width: 32px;
-  height: 32px;
-  background: #fff;
+  width: 100px;
+  height: 100px;
+  background: #ffffff;
   border-radius: 50%;
   position: absolute;
-  top: 2px;
-  left: 2px;
+  top: 10px;
+  left: 10px;
   transition: left 0.3s ease;
 }
 
+/* POSICIÓN ENCENDIDO */
 .switch.on .knob {
-  left: 36px;
+  left: 160px;
 }
