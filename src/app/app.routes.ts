@@ -3,7 +3,7 @@ import { Routes } from '@angular/router';
 export const routes: Routes = [
   {
     path: '',
-    redirectTo: 'principal-administrador',
+    redirectTo: 'admin-auditoria',
     pathMatch: 'full',
   },
   {
@@ -39,6 +39,13 @@ export const routes: Routes = [
     loadComponent: () =>
       import('./paginas/editar-alarma/editar-alarma.page').then(
         (m) => m.EditarAlarmaPage,
+      ),
+  },
+  {
+    path: 'admin-auditoria',
+    loadComponent: () =>
+      import('./paginas/admin-auditoria/admin-auditoria.page').then(
+        (m) => m.AdminAuditoriaPage,
       ),
   },
 ];
