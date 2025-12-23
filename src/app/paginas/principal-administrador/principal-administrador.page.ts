@@ -110,6 +110,6 @@ export class PrincipalAdministradorPage {
     this.router.navigate(['lista-alarmas']);
   }
   clickAuditoria() {
-    alert('Auditoría Activaciones');
+    this.router.navigate(['admin-auditoria']);
   }
 }
