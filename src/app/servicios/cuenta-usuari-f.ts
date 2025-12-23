@@ -13,7 +13,6 @@ export interface UsuarioFinal {
   providedIn: 'root',
 })
 export class CuentaUsuariF {
-  // Array simulado (usuario logueado)
   private usuarios: UsuarioFinal[] = [
     {
       id: 1,
@@ -25,12 +24,10 @@ export class CuentaUsuariF {
     },
   ];
 
-  /** Usuario activo (seguro) */
   private getUsuarioActivo(): UsuarioFinal | null {
     return this.usuarios.length > 0 ? this.usuarios[0] : null;
   }
 
-  /** Obtener usuario */
   getUsuario(): UsuarioFinal {
     const usuario = this.getUsuarioActivo();
     if (!usuario) {
@@ -39,29 +36,39 @@ export class CuentaUsuariF {
     return usuario;
   }
 
-  /** Actualizar teléfono */
   actualizarTelefono(telefono: string): boolean {
     const usuario = this.getUsuarioActivo();
     if (!usuario) return false;
-
     usuario.telefono = telefono;
     return true;
   }
 
-  /** Actualizar foto */
   actualizarFoto(foto: string): boolean {
     const usuario = this.getUsuarioActivo();
     if (!usuario) return false;
-
     usuario.foto = foto;
     return true;
   }
 
-  /** Actualizar contraseña (SIMULADO) */
-  actualizarPassword(password: string): boolean {
+  // --- NUEVA FUNCIÓN SOLICITADA ---
+  actualizarPasswordConVerificacion(
+    passwordActual: string,
+    passwordNueva: string,
+  ): boolean {
     const usuario = this.getUsuarioActivo();
     if (!usuario) return false;
 
+    if (usuario.password === passwordActual) {
+      usuario.password = passwordNueva;
+      return true;
+    }
+    return false;
+  }
+
+  /** Método anterior (opcional mantenerlo) */
+  actualizarPassword(password: string): boolean {
+    const usuario = this.getUsuarioActivo();
+    if (!usuario) return false;
     usuario.password = password;
     return true;
   }
