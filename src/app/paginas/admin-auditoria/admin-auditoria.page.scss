@@ -1,31 +1,30 @@
 .tag-green {
-  background: #00ff00;
-  color: #000;
-  padding: 2px 8px;
+  background: var(--ion-color-success);
+  color: var(--ion-color-success-contrast);
+  padding: 4px 10px;
   border-radius: 6px;
-  font-weight: 900;
+  font-weight: 800;
   font-size: 0.75rem;
   text-transform: uppercase;
 }
 
 .tag-red {
-  background: #ff0000;
-  color: white;
-  padding: 2px 8px;
+  background: var(--ion-color-danger);
+  color: var(--ion-color-danger-contrast);
+  padding: 4px 10px;
   border-radius: 6px;
-  font-weight: 900;
+  font-weight: 800;
   font-size: 0.75rem;
   text-transform: uppercase;
 }
 
 .bg-green {
-  background: #00ff00;
+  background: var(--ion-color-success);
 }
 .bg-red {
-  background: #ff0000;
+  background: var(--ion-color-danger);
 }
 
-// 2. HEADER
 .custom-header {
   ion-toolbar {
     --background: var(--ion-color-step-50, #f1eef8);
@@ -166,7 +165,6 @@
   margin-top: 20px;
   padding: 20px 0;
   border-top: 1px solid var(--ion-color-step-150);
-
   ion-button {
     flex: 1;
     --border-radius: 10px;
@@ -178,22 +176,18 @@
   .custom-header ion-toolbar {
     --background: #1c1c1e;
   }
-
   .audit-card {
     background: #1c1c1e;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
   }
-
   .label-text {
     background: #3a2b5e;
     color: #d4c5f3;
   }
-
   .date-section ion-datetime {
     background: #232323;
     --background: #232323;
   }
-
   .modal-footer-buttons {
     border-top-color: var(--ion-color-step-250);
   }

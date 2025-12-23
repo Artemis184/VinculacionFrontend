@@ -34,6 +34,22 @@ import {
   add,
 } from 'ionicons/icons';
 
+interface AlarmaCatalogo {
+  id: number;
+  nombre: string;
+  direccion: string;
+}
+
+interface RegistroAuditoria {
+  alarmaId: number;
+  estado: 'ACTIVADA' | 'DESACTIVADA';
+  usuario: string;
+  fechaISO: string;
+  alarmaNombre?: string;
+  direccion?: string;
+  fechaTexto?: string;
+}
+
 @Component({
   standalone: true,
   selector: 'app-admin-auditoria',
@@ -71,13 +87,13 @@ export class AdminAuditoriaPage implements OnInit {
   fechaFinISO: string | null = null;
   alarmaSeleccionadaId: number | null = null;
 
-  alarmasCatalogo = [
+  alarmasCatalogo: AlarmaCatalogo[] = [
     { id: 1, nombre: 'ALARMA # 001', direccion: 'DIRECCION CORTA A' },
     { id: 2, nombre: 'ALARMA # 002', direccion: 'DIRECCION CORTA B' },
     { id: 3, nombre: 'ALARMA # 003', direccion: 'DIRECCION CORTA C' },
   ];
 
-  auditoriaAll = [
+  auditoriaAll: RegistroAuditoria[] = [
     {
       alarmaId: 1,
       estado: 'ACTIVADA',
@@ -86,7 +102,7 @@ export class AdminAuditoriaPage implements OnInit {
     },
     {
       alarmaId: 2,
-      estado: 'DESACTIVADO',
+      estado: 'DESACTIVADA',
       usuario: 'Usuario 01',
       fechaISO: '2025-08-17T11:30:00Z',
     },
@@ -104,13 +120,13 @@ export class AdminAuditoriaPage implements OnInit {
     },
     {
       alarmaId: 2,
-      estado: 'DESACTIVADO',
+      estado: 'DESACTIVADA',
       usuario: 'Usuario 01',
       fechaISO: '2025-08-20T18:00:00Z',
     },
   ];
 
-  auditoriaFiltrada: any[] = [];
+  auditoriaFiltrada: RegistroAuditoria[] = [];
 
   constructor() {
     addIcons({
@@ -132,26 +148,28 @@ export class AdminAuditoriaPage implements OnInit {
   aplicarFiltros() {
     let resultado = [...this.auditoriaAll];
 
+    const START_OF_DAY = [0, 0, 0, 0] as const;
+    const END_OF_DAY = [23, 59, 59, 999] as const;
+
     if (this.fechaInicioISO || this.fechaFinISO) {
       resultado = resultado.filter((item) => {
         const fechaItem = new Date(item.fechaISO).getTime();
 
         if (this.fechaInicioISO) {
           const inicio = new Date(this.fechaInicioISO);
-          inicio.setHours(0, 0, 0, 0);
+          inicio.setHours(...START_OF_DAY);
           if (fechaItem < inicio.getTime()) return false;
         }
 
         if (this.fechaFinISO) {
           const fin = new Date(this.fechaFinISO);
-          fin.setHours(23, 59, 59, 999);
+          fin.setHours(...END_OF_DAY);
           if (fechaItem > fin.getTime()) return false;
         }
         return true;
       });
     }
 
-    // Filtrado por Alarma
     if (this.alarmaSeleccionadaId !== null) {
       resultado = resultado.filter(
         (item) => item.alarmaId === this.alarmaSeleccionadaId,
@@ -192,7 +210,7 @@ export class AdminAuditoriaPage implements OnInit {
     this.modalAlarmaOpen = false;
   }
 
-  private enriquecer(items: any[]) {
+  private enriquecer(items: RegistroAuditoria[]): RegistroAuditoria[] {
     return items.map((item) => {
       const alarmaInfo = this.alarmasCatalogo.find(
         (a) => a.id === item.alarmaId,
