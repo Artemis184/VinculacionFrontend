@@ -11,6 +11,7 @@
     "test": "ng test",
     "lint": "ng lint",
     "format": "prettier --write src/",
+    "format:check": "prettier --check src/",
     "generate-env": "node scripts/generate-env.js",
     "prestart": "npm run generate-env",
     "prebuild": "npm run generate-env",
