@@ -87,9 +87,19 @@
           </div>
         </div>
 
-        <!-- ✅ SWITCH -->
-        <div class="switch" [class.on]="a.encendida" (click)="toggleAlarma(a)">
+        <div
+          class="switch"
+          role="button"
+          tabindex="0"
+          [class.on]="a.encendida"
+          [class.loading]="a.loading"
+          (click)="!a.loading && toggleAlarma(a)"
+          (keydown.enter)="!a.loading && toggleAlarma(a)"
+        >
           <div class="knob"></div>
+
+          <!-- SPINNER DE CARGA -->
+          <div class="spinner" *ngIf="a.loading"></div>
         </div>
       </ion-card-content>
     </ion-card>

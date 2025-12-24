@@ -1,4 +1,5 @@
 import { Component, OnInit, inject } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { IonicModule, PopoverController } from '@ionic/angular';
 
 import { CuentaUsuariF, UsuarioFinal } from '../../servicios/cuenta-usuari-f';
@@ -10,6 +11,7 @@ import { MenUComponent } from '../../componentes/men-u/men-u.component';
   styleUrls: ['./principal-usuariof.page.scss'],
   standalone: true,
   imports: [
+    CommonModule,
     IonicModule, // ✅ SOLO ESTO
   ],
 })
@@ -26,6 +28,7 @@ export class PrincipalUsuariofPage implements OnInit {
     nombre: 'ALARMA #001',
     direccion: 'ENTRE LA CALLE XYZ, DIAGONAL A LA CASA',
     encendida: false,
+    loading: false,
   };
 
   ngOnInit() {
@@ -39,13 +42,39 @@ export class PrincipalUsuariofPage implements OnInit {
     // cargar alarma desde backend según usuario
   }
 
-  // 🔘 SWITCH ON / OFF
-  toggleAlarma() {
-    this.alarma.encendida = !this.alarma.encendida;
+  /* =========================
+     TOGGLE ALARMA (SIMULA BACKEND)
+  ========================= */
+  async toggleAlarma(alarma: any) {
+    if (alarma.loading) return;
 
-    // 🔌 FUTURO:
-    // enviar estado al backend / IoT
-    // ejemplo: alarmaService.cambiarEstado(this.alarma)
+    alarma.loading = true;
+
+    try {
+      const nuevoEstado = !alarma.encendida;
+
+      // ⏳ SIMULACIÓN DE BACKEND (reemplaza luego por API real)
+      await this.simularBackend();
+
+      // ✅ SOLO AQUÍ se mueve el switch
+      alarma.encendida = nuevoEstado;
+    } catch (error) {
+      console.error('Error al cambiar estado de alarma', error);
+      // aquí luego puedes meter shake / toast / etc.
+    } finally {
+      alarma.loading = false;
+    }
+  }
+
+  /* =========================
+     SIMULACIÓN BACKEND
+  ========================= */
+  private simularBackend(): Promise<void> {
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        resolve();
+      }, 900); // ⏱ ajusta a gusto (500–1200ms)
+    });
   }
 
   // 📂 MENÚ DE USUARIO
