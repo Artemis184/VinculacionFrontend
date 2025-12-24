@@ -41,4 +41,11 @@ export const routes: Routes = [
         (m) => m.EditarAlarmaPage,
       ),
   },
+  {
+    path: 'admin-auditoria',
+    loadComponent: () =>
+      import('./paginas/admin-auditoria/admin-auditoria.page').then(
+        (m) => m.AdminAuditoriaPage,
+      ),
+  },
 ];

@@ -1,0 +1,150 @@
+<ion-header class="ion-no-border custom-header">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button color="dark"></ion-menu-button>
+    </ion-buttons>
+    <ion-title>AUDITORÍA</ion-title>
+    <ion-buttons slot="end">
+      <ion-button
+        (click)="limpiarFiltros()"
+        *ngIf="fechaInicioISO || fechaFinISO || alarmaSeleccionadaId"
+      >
+        <ion-icon name="funnel-outline" color="primary"></ion-icon>
+      </ion-button>
+      <ion-button color="dark">
+        <ion-icon name="person-circle" size="large"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content color="light">
+  <ion-list lines="none" class="ion-padding">
+    <div class="audit-card" *ngFor="let a of auditoriaFiltrada">
+      <div class="card-info">
+        <div class="card-header-row">
+          <span class="card-title">{{ a.alarmaNombre }}</span>
+          <span
+            class="status-tag"
+            [ngClass]="a.estado === 'ACTIVADA' ? 'tag-green' : 'tag-red'"
+          >
+            {{ a.estado }}
+          </span>
+        </div>
+        <p>{{ a.direccion }}</p>
+        <p>Usuario: {{ a.usuario }}</p>
+        <p>Fecha: {{ a.fechaTexto }}</p>
+      </div>
+      <div class="card-arrow">
+        <ion-icon name="chevron-forward-outline"></ion-icon>
+      </div>
+      <div
+        class="card-color-bar"
+        [ngClass]="a.estado === 'ACTIVADA' ? 'bg-green' : 'bg-red'"
+      ></div>
+    </div>
+  </ion-list>
+
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed" class="custom-fab">
+    <ion-fab-button class="fab-main">
+      <ion-icon name="close"></ion-icon>
+    </ion-fab-button>
+    <ion-fab-list side="top">
+      <div class="fab-label-row" (click)="abrirModalFechas()">
+        <div class="label-text">Filtrar por fechas</div>
+        <ion-fab-button size="small" class="fab-sub">
+          <ion-icon name="calendar-outline"></ion-icon>
+        </ion-fab-button>
+      </div>
+      <div class="fab-label-row" (click)="abrirModalAlarma()">
+        <div class="label-text">Listar por Alarma</div>
+        <ion-fab-button size="small" class="fab-sub">
+          <ion-icon name="list-outline"></ion-icon>
+        </ion-fab-button>
+      </div>
+    </ion-fab-list>
+  </ion-fab>
+
+  <ion-modal
+    [isOpen]="modalFechasOpen"
+    (didDismiss)="cerrarModalFechas()"
+    [breakpoints]="[0, 0.95]"
+    [initialBreakpoint]="0.95"
+    [keepContentsMounted]="true"
+  >
+    <ng-template>
+      <ion-header>
+        <ion-toolbar>
+          <ion-title>Rango de Fecha</ion-title>
+          <ion-buttons slot="end">
+            <ion-button (click)="cerrarModalFechas()">CERRAR</ion-button>
+          </ion-buttons>
+        </ion-toolbar>
+      </ion-header>
+      <ion-content class="ion-padding date-modal-content">
+        <div class="date-section">
+          <ion-text color="primary"
+            ><h3><b>Fecha Inicio</b></h3></ion-text
+          >
+          <ion-datetime
+            presentation="date"
+            size="cover"
+            [(ngModel)]="fechaInicioISO"
+            (ionChange)="aplicarFiltros()"
+          >
+          </ion-datetime>
+        </div>
+        <div class="date-section">
+          <ion-text color="primary"
+            ><h3><b>Fecha Fin</b></h3></ion-text
+          >
+          <ion-datetime
+            presentation="date"
+            size="cover"
+            [(ngModel)]="fechaFinISO"
+            (ionChange)="aplicarFiltros()"
+          >
+          </ion-datetime>
+        </div>
+        <div class="modal-footer-buttons">
+          <ion-button
+            fill="outline"
+            expand="block"
+            (click)="limpiarFiltros(); cerrarModalFechas()"
+            >LIMPIAR</ion-button
+          >
+          <ion-button expand="block" (click)="aplicarFiltroFechas()"
+            >APLICAR</ion-button
+          >
+        </div>
+      </ion-content>
+    </ng-template>
+  </ion-modal>
+
+  <ion-modal [isOpen]="modalAlarmaOpen" (didDismiss)="cerrarModalAlarma()">
+    <ng-template>
+      <ion-header>
+        <ion-toolbar>
+          <ion-title>Seleccionar Alarma</ion-title>
+          <ion-buttons slot="end">
+            <ion-button (click)="cerrarModalAlarma()">CERRAR</ion-button>
+          </ion-buttons>
+        </ion-toolbar>
+      </ion-header>
+      <ion-content>
+        <ion-radio-group
+          [(ngModel)]="alarmaSeleccionadaId"
+          (ionChange)="seleccionarAlarma()"
+        >
+          <ion-item *ngFor="let al of alarmasCatalogo" button>
+            <ion-label>
+              <h2>{{ al.nombre }}</h2>
+              <p>{{ al.direccion }}</p>
+            </ion-label>
+            <ion-radio slot="end" [value]="al.id"></ion-radio>
+          </ion-item>
+        </ion-radio-group>
+      </ion-content>
+    </ng-template>
+  </ion-modal>
+</ion-content>

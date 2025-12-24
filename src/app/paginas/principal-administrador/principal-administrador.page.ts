@@ -159,6 +159,6 @@ export class PrincipalAdministradorPage {
   }
 
   clickAuditoria() {
-    alert('Auditoría Activaciones');
+    this.router.navigate(['admin-auditoria']);
   }
 }
