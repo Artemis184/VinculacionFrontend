@@ -1,7 +1,7 @@
 <ion-header class="header">
   <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-back-button></ion-back-button>
+      <ion-back-button defaultHref="/principal-administrador"></ion-back-button>
     </ion-buttons>
     <ion-buttons slot="end">
       <ion-icon name="person-circle-outline" class="icono-perfil"></ion-icon>
@@ -22,31 +22,46 @@
   <div class="card acciones">
     <h3>Estado de solicitud</h3>
 
-    <ion-item>
+    <ion-item button detail="false" (click)="abrirEstado()">
       <ion-label>Estado</ion-label>
-      <ion-select [(ngModel)]="estadoSeleccionado">
-        <ion-select-option value="APROBADO">Aprobar</ion-select-option>
-        <ion-select-option value="RECHAZADO">Rechazar</ion-select-option>
+      <ion-select
+        #estadoSelect
+        [(ngModel)]="estadoSeleccionado"
+        interface="alert"
+        placeholder="Seleccionar"
+      >
+        <ion-select-option value="APROBADO"> ✅ Aprobado </ion-select-option>
+
+        <ion-select-option value="RECHAZADO"> ❌ Rechazado </ion-select-option>
       </ion-select>
     </ion-item>
 
     <h3>Alarmas</h3>
 
     <ion-list>
-      <ion-item *ngFor="let a of alarmas">
+      <ion-item
+        button
+        detail="false"
+        *ngFor="let a of alarmas"
+        (click)="toggleAlarma(a.id)"
+      >
         <ion-label>{{ a.nombre }}</ion-label>
         <ion-checkbox
           slot="end"
           [checked]="usuario.alarmasSeleccionadas?.includes(a.id)"
-          (ionChange)="toggleAlarma(a.id)"
-        >
-        </ion-checkbox>
+          (ionClick)="$event.stopPropagation()"
+        ></ion-checkbox>
       </ion-item>
     </ion-list>
   </div>
 
   <div class="acciones">
-    <ion-button expand="block" color="primary" (click)="abrirConfirmacion()">
+    <ion-button
+      expand="block"
+      color="success"
+      [disabled]="!esFormularioValido()"
+      (click)="abrirConfirmacion()"
+    >
       <ion-icon name="save-outline" slot="start"></ion-icon>
       Guardar
     </ion-button>
@@ -79,6 +94,7 @@
         <h2>Antes de guardar, corrobora:</h2>
         <p><b>Usuario:</b> {{ usuario.nombre }}</p>
         <p><b>Estado:</b> {{ estadoSeleccionado }}</p>
+
         <p><b>Alarmas:</b></p>
         <ul>
           <li *ngFor="let id of usuario.alarmasSeleccionadas">
@@ -89,6 +105,7 @@
         <ion-button expand="block" color="success" (click)="guardar()">
           Confirmar
         </ion-button>
+
         <ion-button
           expand="block"
           fill="outline"

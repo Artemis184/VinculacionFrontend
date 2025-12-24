@@ -1,4 +1,4 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, OnInit, inject, ViewChild } from '@angular/core';
 import { CommonModule, Location } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -54,16 +54,17 @@ import {
   ],
 })
 export class ListadoUsuPage implements OnInit {
-  // Inyección usando inject()
   private route = inject(ActivatedRoute);
   private location = inject(Location);
   private router = inject(Router);
   private servicio = inject(UsuPendientes);
 
+  estadoSeleccionado: EstadoPeticion | null = null;
   usuario!: UsuarioPendiente;
   alarmas: Alarma[] = [];
-  estadoSeleccionado: EstadoPeticion = 'PENDIENTE';
   modalConfirmacion = false;
+
+  @ViewChild('estadoSelect') estadoSelect!: IonSelect;
 
   constructor() {
     addIcons({
@@ -75,10 +76,11 @@ export class ListadoUsuPage implements OnInit {
 
   ngOnInit() {
     const id = Number(this.route.snapshot.paramMap.get('id'));
+
     this.servicio.getUsuarioById(id).subscribe((u) => {
       if (u) {
         this.usuario = { ...u };
-        this.estadoSeleccionado = u.estado;
+        this.estadoSeleccionado = null;
       }
     });
 
@@ -91,6 +93,7 @@ export class ListadoUsuPage implements OnInit {
     if (!this.usuario.alarmasSeleccionadas) {
       this.usuario.alarmasSeleccionadas = [];
     }
+
     const index = this.usuario.alarmasSeleccionadas.indexOf(id);
     if (index >= 0) {
       this.usuario.alarmasSeleccionadas.splice(index, 1);
@@ -99,7 +102,25 @@ export class ListadoUsuPage implements OnInit {
     }
   }
 
+  esFormularioValido(): boolean {
+    if (!this.estadoSeleccionado) return false;
+
+    if (
+      !this.usuario.alarmasSeleccionadas ||
+      this.usuario.alarmasSeleccionadas.length === 0
+    ) {
+      return false;
+    }
+
+    return true;
+  }
+
   abrirConfirmacion() {
+    if (!this.esFormularioValido()) {
+      alert('Debe seleccionar un estado y al menos una alarma');
+      return;
+    }
+
     this.modalConfirmacion = true;
   }
 
@@ -108,7 +129,19 @@ export class ListadoUsuPage implements OnInit {
   }
 
   guardar() {
+    if (!this.estadoSeleccionado) {
+      return;
+    }
+
+    if (
+      !this.usuario.alarmasSeleccionadas ||
+      this.usuario.alarmasSeleccionadas.length === 0
+    ) {
+      return;
+    }
+
     this.usuario.estado = this.estadoSeleccionado;
+
     this.servicio.guardarCambios(this.usuario).subscribe(() => {
       this.modalConfirmacion = false;
       this.router.navigate(['/listado-pendientes-acciones']);
@@ -121,5 +154,9 @@ export class ListadoUsuPage implements OnInit {
 
   nombreAlarma(id: number): string {
     return this.alarmas.find((a) => a.id === id)?.nombre || '';
+  }
+
+  abrirEstado() {
+    this.estadoSelect.open();
   }
 }

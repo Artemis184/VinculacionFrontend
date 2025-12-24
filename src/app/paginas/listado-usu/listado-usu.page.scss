@@ -32,6 +32,16 @@
   gap: 12px;
 }
 
+.item-select {
+  --padding-start: 16px;
+  cursor: pointer;
+}
+
+ion-select {
+  width: 100%;
+  max-width: 100%;
+}
+
 ion-modal {
   --border-radius: 20px;
 }

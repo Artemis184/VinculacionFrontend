@@ -161,5 +161,4 @@ export class PrincipalAdministradorPage {
   clickAuditoria() {
     this.router.navigate(['admin-auditoria']);
   }
-
 }
