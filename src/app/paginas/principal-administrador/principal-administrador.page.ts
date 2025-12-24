@@ -161,4 +161,8 @@ export class PrincipalAdministradorPage {
   clickAuditoria() {
     this.router.navigate(['admin-auditoria']);
   }
+
+  clicklistadoPendienteAcciones() {
+    this.router.navigate(['listado-pendientes-acciones']);
+  }
 }

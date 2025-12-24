@@ -48,4 +48,18 @@ export const routes: Routes = [
         (m) => m.AdminAuditoriaPage,
       ),
   },
+  {
+    path: 'listado-pendientes-acciones',
+    loadComponent: () =>
+      import('./paginas/listado-pendientes-acciones/listado-pendientes-acciones.page').then(
+        (m) => m.ListadoPendientesAccionesPage,
+      ),
+  },
+  {
+    path: 'listado-usu/:id',
+    loadComponent: () =>
+      import('./paginas/listado-usu/listado-usu.page').then(
+        (m) => m.ListadoUsuPage,
+      ),
+  },
 ];
