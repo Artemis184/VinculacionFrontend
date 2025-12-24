@@ -12,10 +12,7 @@ import {
   IonButtons,
   IonBackButton,
   IonButton,
-  IonText,
   IonCard,
-  IonItem,
-  IonLabel,
 } from '@ionic/angular/standalone';
 
 import { addIcons } from 'ionicons';
@@ -44,7 +41,6 @@ import { UsuPendientes } from '../../servicios/usu-pendientes';
   ],
 })
 export class ListadoPendientesAccionesPage implements OnInit {
-  // Inyección usando inject()
   private usuariosService = inject(UsuPendientes);
   private router = inject(Router);
 
@@ -68,7 +64,6 @@ export class ListadoPendientesAccionesPage implements OnInit {
   }
 
   verDetalle(usuario: any) {
-    console.log('Click usuario:', usuario);
     this.router.navigate(['/listado-usu', usuario.id]);
   }
 }

@@ -147,7 +147,7 @@ export class PrincipalAdministradorPage {
      MENÚ
   ========================= */
   clickSolicitudes() {
-    alert('Lista de solicitudes');
+    this.router.navigate(['listado-pendientes-acciones']);
   }
 
   clickUsuarios() {
@@ -162,7 +162,4 @@ export class PrincipalAdministradorPage {
     this.router.navigate(['admin-auditoria']);
   }
 
-  clicklistadoPendienteAcciones() {
-    this.router.navigate(['listado-pendientes-acciones']);
-  }
 }
