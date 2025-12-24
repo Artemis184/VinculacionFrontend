@@ -12,6 +12,9 @@ ion-title {
   font-weight: 800;
 }
 
+/* =========================
+   VARIABLES
+========================= */
 :host {
   --menu-bg: #f6f1fb;
   --popup-bg: #f6f1fb;
@@ -35,6 +38,9 @@ ion-title {
   }
 }
 
+/* =========================
+   MENÚ
+========================= */
 ion-list {
   --background: transparent !important;
 }
@@ -56,20 +62,17 @@ ion-item::part(native) {
 
 .menu-box {
   margin: 16px;
-  background: var(--menu-bg) !important;
+  background: var(--menu-bg);
   color: var(--text-color);
   border-radius: 16px;
   box-shadow: var(--shadow);
   padding: 8px;
-  border: none !important;
-  outline: none !important;
 }
 
 .menu-item {
   --background: transparent !important;
   border-radius: 12px;
   margin-bottom: 6px;
-  border: 0 !important;
   --background-hover: rgba(255, 255, 255, 0.06);
   --background-activated: rgba(255, 255, 255, 0.08);
 }
@@ -94,28 +97,32 @@ ion-item::part(native) {
 
 .arrow {
   margin-left: auto;
-  color: var(--muted-color) !important;
+  color: var(--muted-color);
   font-size: 18px;
 }
 
+/* =========================
+   HEADER
+========================= */
 .icon-btn ion-icon {
   font-size: 30px;
   color: var(--accent-purple);
 }
 
+/* =========================
+   POPUP CUENTA
+========================= */
 .account-popup {
   position: absolute;
   top: 58px;
   right: 16px;
   width: 170px;
-  background: var(--popup-bg) !important;
-  color: var(--text-color) !important;
+  background: var(--popup-bg);
+  color: var(--text-color);
   border-radius: 14px;
   box-shadow: var(--shadow-strong);
   padding: 8px;
   z-index: 999;
-  border: none !important;
-  outline: none !important;
 }
 
 .account-item {
@@ -124,13 +131,12 @@ ion-item::part(native) {
   justify-content: space-between;
   align-items: center;
   padding: 10px 12px;
-  border: none !important;
-  outline: none !important;
   background: transparent;
   border-radius: 12px;
   font-weight: 700;
   cursor: pointer;
   color: var(--text-color);
+  border: none;
 }
 
 .account-item:hover {
@@ -151,6 +157,9 @@ ion-item::part(native) {
   font-size: 18px;
 }
 
+/* =========================
+   ALARMAS
+========================= */
 .alarma-card {
   margin-bottom: 14px;
 }
@@ -180,34 +189,100 @@ ion-item::part(native) {
   padding: 6px 10px;
   border-radius: 999px;
   background: var(--accent-purple);
-  color: white;
+  color: #fff;
+  transition: background 0.35s ease;
 }
 
 .estado-text.on {
   background: var(--accent-green);
 }
-
+/* =========================
+   SWITCH (UNIFICADO CON ADMIN)
+========================= */
 .switch {
   width: 270px;
   height: 120px;
-  border-radius: 70px;
-  margin: 6px auto 0;
-  background: var(--accent-purple);
+  background: #464646;
+  border-radius: 80px;
+  position: relative;
+  cursor: pointer;
+  margin: 0 auto;
+  transition: background 0.3s ease;
+}
+
+/* SWITCH ENCENDIDO */
+.switch.on {
+  background: #19d638;
+}
+
+/* BOTÓN INTERNO */
+.knob {
+  width: 100px;
+  height: 100px;
+  background: #ffffff;
+  border-radius: 50%;
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  transition: left 0.3s ease;
+}
+
+/* POSICIÓN ENCENDIDO */
+.switch.on .knob {
+  left: 160px;
+}
+
+.switch.loading {
+  pointer-events: none;
+}
+
+.spinner {
+  position: absolute;
+  inset: 0;
   display: flex;
   align-items: center;
-  padding: 14px;
-  transition: 0.2s;
-  cursor: pointer;
+  justify-content: center;
+  z-index: 3;
 }
 
-.switch.on {
-  background: var(--accent-green);
-  justify-content: flex-end;
+.spinner::after {
+  content: "";
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  border: 3px solid rgba(255, 255, 255, 0.25);
+  border-top-color: #ffffff;
+  animation:
+    spin 0.9s linear infinite,
+    pulse 1.4s ease-in-out infinite;
+}
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
 }
 
-.knob {
-  width: 92px;
-  height: 92px;
-  border-radius: 999px;
-  background: #d9d9d9;
+@keyframes pulse {
+  0% {
+    opacity: 0.6;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.6;
+  }
+}
+
+.switch.loading .knob {
+  opacity: 0.45;
+  filter: saturate(0.6);
+}
+
+.switch.loading:not(.on) .spinner::after {
+  border-top-color: #cfcfcf;
+}
+
+.switch.loading.on .spinner::after {
+  border-top-color: #ffffff;
 }

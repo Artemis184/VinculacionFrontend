@@ -25,16 +25,19 @@
           <div class="alarma-direccion">{{ alarma.direccion }}</div>
         </div>
 
-        <!-- SWITCH (ACCESIBILIDAD INTERMEDIA) -->
         <div
           class="switch"
           role="button"
           tabindex="0"
           [class.on]="alarma.encendida"
-          (click)="toggleAlarma()"
-          (keydown.enter)="toggleAlarma()"
+          [class.loading]="alarma.loading"
+          (click)="!alarma.loading && toggleAlarma(alarma)"
+          (keydown.enter)="!alarma.loading && toggleAlarma(alarma)"
         >
           <div class="knob"></div>
+
+          <!-- SPINNER DE CARGA -->
+          <div class="spinner" *ngIf="alarma.loading"></div>
         </div>
       </ion-card-content>
     </ion-card>

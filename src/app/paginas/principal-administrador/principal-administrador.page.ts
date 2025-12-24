@@ -48,6 +48,9 @@ import {
 export class PrincipalAdministradorPage {
   private router = inject(Router);
 
+  /* =========================
+     CUENTA
+  ========================= */
   cuentaVisible = false;
 
   toggleCuenta() {
@@ -64,6 +67,9 @@ export class PrincipalAdministradorPage {
     alert('Logout (demo)');
   }
 
+  /* =========================
+     SOLICITUDES
+  ========================= */
   solicitudes = [
     { id: 1, estado: 'Pendiente' },
     { id: 2, estado: 'Pendiente' },
@@ -75,40 +81,83 @@ export class PrincipalAdministradorPage {
     return this.solicitudes.length;
   }
 
+  /* =========================
+     ALARMAS (CON ESTADO UI)
+  ========================= */
   alarmasAsignadas = [
     {
       id: 1,
       nombre: 'ALARMA # 001',
       direccion: 'ENTRE CALLE XYZ, DIAGONAL A CASA A',
       encendida: false,
+      loading: false, // 🔑
     },
     {
       id: 2,
       nombre: 'ALARMA # 002',
       direccion: 'CALLE 10, CASA 5',
       encendida: true,
+      loading: false,
     },
     {
       id: 3,
       nombre: 'ALARMA # 003',
       direccion: 'AV. PRINCIPAL, EDIF. A',
       encendida: false,
+      loading: false,
     },
   ];
 
-  toggleAlarma(alarma: any) {
-    alarma.encendida = !alarma.encendida;
+  /* =========================
+     TOGGLE ALARMA (SIMULA BACKEND)
+  ========================= */
+  async toggleAlarma(alarma: any) {
+    if (alarma.loading) return;
+
+    alarma.loading = true;
+
+    try {
+      const nuevoEstado = !alarma.encendida;
+
+      // ⏳ SIMULACIÓN DE BACKEND (reemplaza luego por API real)
+      await this.simularBackend();
+
+      // ✅ SOLO AQUÍ se mueve el switch
+      alarma.encendida = nuevoEstado;
+    } catch (error) {
+      console.error('Error al cambiar estado de alarma', error);
+      // aquí luego puedes meter shake / toast / etc.
+    } finally {
+      alarma.loading = false;
+    }
   }
 
+  /* =========================
+     SIMULACIÓN BACKEND
+  ========================= */
+  private simularBackend(): Promise<void> {
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        resolve();
+      }, 900); // ⏱ ajusta a gusto (500–1200ms)
+    });
+  }
+
+  /* =========================
+     MENÚ
+  ========================= */
   clickSolicitudes() {
     alert('Lista de solicitudes');
   }
+
   clickUsuarios() {
-    alert('Lista de usuarios finales ');
+    alert('Lista de usuarios finales');
   }
+
   clickAlarmas() {
     this.router.navigate(['lista-alarmas']);
   }
+
   clickAuditoria() {
     alert('Auditoría Activaciones');
   }
