@@ -1,109 +1,19 @@
-<!-- MENÚ LATERAL -->
-<ion-menu
-  contentId="adminContent"
-  side="start"
-  menuId="adminMenu"
-  type="overlay"
->
-  <ion-content class="menu-content">
-    <div class="menu-box">
-      <ion-list lines="none" class="menu-list">
-        <ion-menu-toggle autoHide="true">
-          <ion-item button class="menu-item" (click)="clickSolicitudes()">
-            <ion-label class="menu-text">Solicitudes</ion-label>
-            <ion-badge class="badge">{{ solicitudesCount }}</ion-badge>
-          </ion-item>
-        </ion-menu-toggle>
+<!-- MENU SOLO ADMIN -->
+<app-admin-side-menu
+  [solicitudesCount]="solicitudesCount"
+></app-admin-side-menu>
 
-        <ion-menu-toggle autoHide="true">
-          <ion-item button class="menu-item" (click)="clickUsuarios()">
-            <ion-label class="menu-text">Lista de usuarios</ion-label>
-            <span class="arrow">›</span>
-          </ion-item>
-        </ion-menu-toggle>
+<!-- HEADER -->
+<app-main-header
+  title="Alarmas asignadas"
+  [showMenu]="true"
+  [showUserMenu]="true"
+></app-main-header>
 
-        <ion-menu-toggle autoHide="true">
-          <ion-item button class="menu-item" (click)="clickAlarmas()">
-            <ion-label class="menu-text">Lista de Alarmas</ion-label>
-            <span class="arrow">›</span>
-          </ion-item>
-        </ion-menu-toggle>
-
-        <ion-menu-toggle autoHide="true">
-          <ion-item button class="menu-item" (click)="clickAuditoria()">
-            <ion-label class="menu-text">Auditoria Activaciones</ion-label>
-            <span class="arrow">›</span>
-          </ion-item>
-        </ion-menu-toggle>
-      </ion-list>
-    </div>
-  </ion-content>
-</ion-menu>
-
-<!-- CONTENIDO PRINCIPAL -->
-<div id="adminContent" class="page-shell">
-  <ion-header>
-    <ion-toolbar>
-      <ion-buttons slot="start">
-        <ion-menu-button menu="adminMenu"></ion-menu-button>
-      </ion-buttons>
-
-      <ion-title>Alarmas asignadas</ion-title>
-
-      <!-- ✅ Ícono morado arriba (abre popup) -->
-      <ion-buttons slot="end">
-        <ion-button class="icon-btn" (click)="toggleCuenta()">
-          <ion-icon name="person-circle"></ion-icon>
-        </ion-button>
-      </ion-buttons>
-    </ion-toolbar>
-  </ion-header>
-
-  <ion-content fullscreen="true" class="ion-padding">
-    <!-- ✅ POPUP CUENTA / LOGOUT -->
-    <div class="account-popup" *ngIf="cuentaVisible">
-      <button class="account-item" (click)="verCuenta()">
-        <span>Cuenta</span>
-        <span class="mini-icon">👤</span>
-      </button>
-
-      <button class="account-item logout" (click)="logout()">
-        <span>Logout</span>
-        <span class="mini-icon">↪</span>
-      </button>
-    </div>
-
-    <!-- ✅ LISTA DE ALARMAS (hacia abajo) -->
-    <ion-card class="alarma-card" *ngFor="let a of alarmasAsignadas">
-      <ion-card-content>
-        <div class="alarma-top">
-          <div>
-            <div class="alarma-nombre">{{ a.nombre }}</div>
-            <div class="alarma-dir">{{ a.direccion }}</div>
-          </div>
-
-          <div class="estado-text" [class.on]="a.encendida">
-            {{ a.encendida ? 'ENCENDIDO' : 'APAGADO' }}
-          </div>
-        </div>
-
-        <div
-          class="switch"
-          role="button"
-          tabindex="0"
-          [class.on]="a.encendida"
-          [class.loading]="a.loading"
-          (click)="!a.loading && toggleAlarma(a)"
-          (keydown.enter)="!a.loading && toggleAlarma(a)"
-        >
-          <div class="knob"></div>
-
-          <!-- SPINNER DE CARGA -->
-          <div class="spinner" *ngIf="a.loading"></div>
-        </div>
-      </ion-card-content>
-    </ion-card>
-
-    <div style="height: 40px"></div>
-  </ion-content>
-</div>
+<!-- CONTENIDO -->
+<ion-content class="ion-padding">
+  <app-alarm-switch
+    [alarmas]="alarmasAsignadas"
+    (toggle)="toggleAlarma($event)"
+  ></app-alarm-switch>
+</ion-content>

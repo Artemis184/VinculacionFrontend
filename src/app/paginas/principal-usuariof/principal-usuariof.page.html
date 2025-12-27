@@ -1,45 +1,14 @@
-<ion-header>
-  <ion-toolbar>
-    <!-- FOTO USUARIO -->
-    <ion-buttons slot="start">
-      <ion-button (click)="abrirMenu($event)">
-        <ion-avatar>
-          <img [src]="usuario.foto" alt="Foto de perfil" />
-        </ion-avatar>
-      </ion-button>
-    </ion-buttons>
-
-    <!-- TÍTULO -->
-    <ion-title class="ion-text-center">Bienvenido</ion-title>
-  </ion-toolbar>
-</ion-header>
+<app-main-header
+  title="Bienvenido"
+  [showMenu]="false"
+  [showUserMenu]="true"
+></app-main-header>
 
 <ion-content>
-  <!-- CONTENEDOR CENTRAL -->
   <div class="center-wrapper">
-    <ion-card class="alarma-card">
-      <ion-card-content>
-        <!-- INFORMACIÓN DE LA ALARMA -->
-        <div class="alarma-info">
-          <div class="alarma-nombre">{{ alarma.nombre }}</div>
-          <div class="alarma-direccion">{{ alarma.direccion }}</div>
-        </div>
-
-        <div
-          class="switch"
-          role="button"
-          tabindex="0"
-          [class.on]="alarma.encendida"
-          [class.loading]="alarma.loading"
-          (click)="!alarma.loading && toggleAlarma(alarma)"
-          (keydown.enter)="!alarma.loading && toggleAlarma(alarma)"
-        >
-          <div class="knob"></div>
-
-          <!-- SPINNER DE CARGA -->
-          <div class="spinner" *ngIf="alarma.loading"></div>
-        </div>
-      </ion-card-content>
-    </ion-card>
+    <app-alarm-switch
+      [alarmas]="alarmasUsuario"
+      (toggle)="toggleAlarma($event)"
+    ></app-alarm-switch>
   </div>
 </ion-content>

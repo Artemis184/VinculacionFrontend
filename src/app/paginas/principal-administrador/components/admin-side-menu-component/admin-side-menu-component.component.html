@@ -1,0 +1,37 @@
+<ion-menu
+  side="start"
+  menuId="adminMenu"
+  contentId="main-content"
+  type="overlay"
+>
+  <ion-content class="menu-content">
+    <ion-list lines="none">
+
+      <ion-menu-toggle autoHide="true">
+        <ion-item button (click)="goSolicitudes()">
+          <ion-label>Solicitudes</ion-label>
+          <ion-badge>{{ solicitudesCount }}</ion-badge>
+        </ion-item>
+      </ion-menu-toggle>
+
+      <ion-menu-toggle autoHide="true">
+        <ion-item button (click)="goUsuarios()">
+          <ion-label>Lista de usuarios</ion-label>
+        </ion-item>
+      </ion-menu-toggle>
+
+      <ion-menu-toggle autoHide="true">
+        <ion-item button (click)="goAlarmas()">
+          <ion-label>Lista de Alarmas</ion-label>
+        </ion-item>
+      </ion-menu-toggle>
+
+      <ion-menu-toggle autoHide="true">
+        <ion-item button (click)="goAuditoria()">
+          <ion-label>Auditoría</ion-label>
+        </ion-item>
+      </ion-menu-toggle>
+
+    </ion-list>
+  </ion-content>
+</ion-menu>

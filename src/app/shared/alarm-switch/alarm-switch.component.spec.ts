@@ -1,19 +1,19 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { IonicModule } from '@ionic/angular';
 
-import { MenUComponent } from './men-u.component';
+import { AlarmSwitchComponent } from './alarm-switch.component';
 
-describe('MenUComponent', () => {
-  let component: MenUComponent;
-  let fixture: ComponentFixture<MenUComponent>;
+describe('AlarmSwitchComponent', () => {
+  let component: AlarmSwitchComponent;
+  let fixture: ComponentFixture<AlarmSwitchComponent>;
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [MenUComponent],
-      imports: [IonicModule.forRoot()],
+      declarations: [ AlarmSwitchComponent ],
+      imports: [IonicModule.forRoot()]
     }).compileComponents();
 
-    fixture = TestBed.createComponent(MenUComponent);
+    fixture = TestBed.createComponent(AlarmSwitchComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   }));

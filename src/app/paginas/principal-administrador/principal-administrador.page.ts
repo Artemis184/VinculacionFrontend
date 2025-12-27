@@ -3,47 +3,32 @@ import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import {
   IonContent,
-  IonHeader,
-  IonToolbar,
-  IonTitle,
-  IonButtons,
-  IonMenuButton,
-  IonMenu,
-  IonList,
-  IonItem,
-  IonLabel,
-  IonBadge,
-  IonMenuToggle,
-  IonCard,
-  IonCardContent,
-  IonButton,
-  IonIcon,
 } from '@ionic/angular/standalone';
+
+
+import { MainHeaderComponent } from '../../shared/main-header/main-header.component';
+import { AlarmSwitchComponent } from '../../shared/alarm-switch/alarm-switch.component';
+import { AdminSideMenuComponent } from './components/admin-side-menu-component/admin-side-menu-component.component';
 
 @Component({
   standalone: true,
   selector: 'app-principal-administrador',
   templateUrl: './principal-administrador.page.html',
   styleUrls: ['./principal-administrador.page.scss'],
-  imports: [
-    CommonModule,
-    IonContent,
-    IonHeader,
-    IonToolbar,
-    IonTitle,
-    IonButtons,
-    IonMenuButton,
-    IonMenu,
-    IonList,
-    IonItem,
-    IonLabel,
-    IonBadge,
-    IonMenuToggle,
-    IonCard,
-    IonCardContent,
-    IonButton,
-    IonIcon,
-  ],
+imports: [
+  CommonModule,
+
+  // Ionic
+  IonContent,
+
+  // Shared
+  MainHeaderComponent,
+  AlarmSwitchComponent,
+
+  // Admin only
+  AdminSideMenuComponent,
+],
+
 })
 export class PrincipalAdministradorPage {
   private router = inject(Router);
@@ -111,26 +96,20 @@ export class PrincipalAdministradorPage {
   /* =========================
      TOGGLE ALARMA (SIMULA BACKEND)
   ========================= */
-  async toggleAlarma(alarma: any) {
-    if (alarma.loading) return;
+async toggleAlarma(alarma: any) {
+  if (alarma.loading) return;
 
-    alarma.loading = true;
+  alarma.loading = true;
 
-    try {
-      const nuevoEstado = !alarma.encendida;
-
-      // ⏳ SIMULACIÓN DE BACKEND (reemplaza luego por API real)
-      await this.simularBackend();
-
-      // ✅ SOLO AQUÍ se mueve el switch
-      alarma.encendida = nuevoEstado;
-    } catch (error) {
-      console.error('Error al cambiar estado de alarma', error);
-      // aquí luego puedes meter shake / toast / etc.
-    } finally {
-      alarma.loading = false;
-    }
+  try {
+    const nuevoEstado = !alarma.encendida;
+    await this.simularBackend();
+    alarma.encendida = nuevoEstado;
+  } finally {
+    alarma.loading = false;
   }
+}
+
 
   /* =========================
      SIMULACIÓN BACKEND
