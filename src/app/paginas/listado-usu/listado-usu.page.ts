@@ -20,7 +20,13 @@ import {
   IonTitle,
 } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
-import { personCircleOutline, saveOutline, closeOutline } from 'ionicons/icons';
+import {
+  personCircleOutline,
+  saveOutline,
+  closeOutline,
+  checkmarkCircle,
+  closeCircle,
+} from 'ionicons/icons';
 import {
   UsuPendientes,
   UsuarioPendiente,
@@ -71,6 +77,8 @@ export class ListadoUsuPage implements OnInit {
       'person-circle-outline': personCircleOutline,
       'save-outline': saveOutline,
       'close-outline': closeOutline,
+      'checkmark-circle': checkmarkCircle,
+      'close-circle': closeCircle,
     });
   }
 
@@ -158,5 +166,13 @@ export class ListadoUsuPage implements OnInit {
 
   abrirEstado() {
     this.estadoSelect.open();
+  }
+
+  get esAprobado(): boolean {
+    return this.estadoSeleccionado === 'APROBADO';
+  }
+
+  get esRechazado(): boolean {
+    return this.estadoSeleccionado === 'RECHAZADO';
   }
 }

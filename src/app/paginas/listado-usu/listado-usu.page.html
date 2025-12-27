@@ -1,8 +1,10 @@
-<ion-header class="header">
+<!-- HEADER SUPERIOR DE LA PÁGINA -->
+<ion-header>
   <ion-toolbar>
     <ion-buttons slot="start">
       <ion-back-button defaultHref="/principal-administrador"></ion-back-button>
     </ion-buttons>
+
     <ion-buttons slot="end">
       <ion-icon name="person-circle-outline" class="icono-perfil"></ion-icon>
     </ion-buttons>
@@ -10,6 +12,23 @@
 </ion-header>
 
 <ion-content class="ion-padding">
+  <!-- BANNER SOLO SI HAY ESTADO -->
+  <div
+    *ngIf="estadoSeleccionado"
+    class="estado-banner"
+    [ngClass]="{
+      aprobado: esAprobado,
+      rechazado: esRechazado
+    }"
+  >
+    <ion-icon
+      [name]="esAprobado ? 'checkmark-circle' : 'close-circle'"
+    ></ion-icon>
+
+    <span> {{ esAprobado ? 'USUARIO APROBADO' : 'USUARIO RECHAZADO' }} </span>
+  </div>
+
+  <!-- CARD USUARIO -->
   <div class="card">
     <h2>{{ usuario.nombre }}</h2>
     <p><b>Teléfono:</b> {{ usuario.telefono }}</p>
@@ -19,6 +38,7 @@
     <p><b>Edad:</b> {{ usuario.edad }}</p>
   </div>
 
+  <!-- CARD ACCIONES -->
   <div class="card acciones">
     <h3>Estado de solicitud</h3>
 
@@ -55,10 +75,15 @@
     </ion-list>
   </div>
 
+  <!-- BOTONES -->
   <div class="acciones">
     <ion-button
       expand="block"
-      color="success"
+      [color]="
+        estadoSeleccionado
+          ? (esAprobado ? 'success' : 'danger')
+          : 'medium'
+      "
       [disabled]="!esFormularioValido()"
       (click)="abrirConfirmacion()"
     >
@@ -77,11 +102,20 @@
     </ion-button>
   </div>
 
-  <ion-modal [isOpen]="modalConfirmacion" (didDismiss)="cerrarConfirmacion()">
+  <!-- MODAL CONFIRMACIÓN -->
+  <ion-modal
+    [isOpen]="modalConfirmacion"
+    (didDismiss)="cerrarConfirmacion()"
+    [cssClass]="
+      esAprobado ? 'modal-aprobado' :
+      esRechazado ? 'modal-rechazado' : ''
+    "
+  >
     <ng-template>
       <ion-header>
-        <ion-toolbar>
-          <ion-title>Confirmación</ion-title>
+        <ion-toolbar [color]="esAprobado ? 'success' : 'danger'">
+          <ion-title> {{ esAprobado ? 'Aprobación' : 'Rechazo' }} </ion-title>
+
           <ion-buttons slot="end">
             <ion-button (click)="cerrarConfirmacion()">
               <ion-icon name="close-outline"></ion-icon>
@@ -91,9 +125,38 @@
       </ion-header>
 
       <ion-content class="ion-padding">
+        <div
+          class="estado-banner"
+          [ngClass]="{
+            aprobado: esAprobado,
+            rechazado: esRechazado
+          }"
+        >
+          <ion-icon
+            [name]="esAprobado ? 'checkmark-circle' : 'close-circle'"
+          ></ion-icon>
+
+          <span>
+            {{ esAprobado ? 'USUARIO APROBADO' : 'USUARIO RECHAZADO' }}
+          </span>
+        </div>
+
         <h2>Antes de guardar, corrobora:</h2>
         <p><b>Usuario:</b> {{ usuario.nombre }}</p>
-        <p><b>Estado:</b> {{ estadoSeleccionado }}</p>
+
+        <!-- ESTADO CON COLOR -->
+        <p>
+          <b>Estado:</b>
+          <span
+            class="estado-texto"
+            [ngClass]="{
+              aprobado: esAprobado,
+              rechazado: esRechazado
+            }"
+          >
+            {{ estadoSeleccionado }}
+          </span>
+        </p>
 
         <p><b>Alarmas:</b></p>
         <ul>
@@ -102,7 +165,11 @@
           </li>
         </ul>
 
-        <ion-button expand="block" color="success" (click)="guardar()">
+        <ion-button
+          expand="block"
+          [color]="esAprobado ? 'success' : 'danger'"
+          (click)="guardar()"
+        >
           Confirmar
         </ion-button>
 
