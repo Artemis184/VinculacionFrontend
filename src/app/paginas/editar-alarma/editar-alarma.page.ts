@@ -93,12 +93,6 @@ export class EditarAlarmaPage implements OnInit {
     this.previewImg = this.imagenOriginal || null;
   }
 
-  colorActiva(): string {
-    return this.alarma?.is_active ? 'success' : 'danger';
-  }
-  textoActiva(): string {
-    return this.alarma?.is_active ? 'Activa' : 'Inactiva';
-  }
   colorHabilitada(): string {
     return this.alarma?.is_enabled ? 'primary' : 'medium';
   }
@@ -169,14 +163,6 @@ export class EditarAlarmaPage implements OnInit {
       return;
     }
 
-    if (!this.alarma.is_enabled && this.alarma.is_active) {
-      await this.toast(
-        'Una alarma no puede estar activa si está deshabilitada',
-        'warning',
-      );
-      return;
-    }
-
     this.guardando = true;
 
     try {
@@ -186,9 +172,8 @@ export class EditarAlarmaPage implements OnInit {
         description,
         location,
         rf_address,
-        is_active: !!this.alarma.is_active,
         is_enabled: !!this.alarma.is_enabled,
-        installation_image: this.imagenOriginal, // imagen no se guarda
+        installation_image: this.previewImg ?? this.imagenOriginal,
       });
 
       await this.toast(

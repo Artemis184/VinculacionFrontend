@@ -6,7 +6,6 @@ export interface Alarma {
   description: string;
   location: string;
   rf_address: string;
-  is_active: boolean;
   is_enabled: boolean;
   installation_image: string;
   created_at: string;
@@ -25,7 +24,6 @@ export class Alarmas {
       description: 'Alarma instalada en zona norte',
       location: 'Calle XYZ',
       rf_address: 'RF-10001',
-      is_active: true,
       is_enabled: true,
       installation_image:
         'https://www.dropbox.com/scl/fi/e935xff5qiyhewasywste/alarma-1.avif?rlkey=cejdtudqrry3p490ksd4yoxuy&st=xy309y4w&dl=1',
@@ -39,7 +37,6 @@ export class Alarmas {
       description: 'Alarma zona sur',
       location: 'Av. Principal',
       rf_address: 'RF-10002',
-      is_active: false,
       is_enabled: true,
       installation_image:
         'https://www.dropbox.com/scl/fi/lw2g7h0np6k9lr2acexo4/alarma-2.jpeg?rlkey=1nglh3eteq9dd493rcryj3tfa&st=b1gucbmu&dl=1',
@@ -53,7 +50,6 @@ export class Alarmas {
       description: 'Alarma en bodega central',
       location: 'Parque industrial',
       rf_address: 'RF-10003',
-      is_active: true,
       is_enabled: false,
       installation_image:
         'https://www.dropbox.com/scl/fi/fj4pc9gyprf1olo4q457p/alarma-3.jpeg?rlkey=bnus5a80grha2gghckjvpqjyd&st=zm0joxlv&dl=1',
@@ -67,7 +63,6 @@ export class Alarmas {
       description: 'Alarma perimetral',
       location: 'Ingreso principal',
       rf_address: 'RF-10004',
-      is_active: true,
       is_enabled: true,
       installation_image:
         'https://www.dropbox.com/scl/fi/pzboi35mm4r01ong8uahr/alarma-4.jpg?rlkey=l026k685ud5x7x0266psmy7wa&st=iu88oqqr&dl=1',
