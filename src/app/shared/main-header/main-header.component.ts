@@ -55,7 +55,7 @@ export class MainHeaderComponent {
   goHome() {
     this.userMenuOpen = false;
     const role = localStorage.getItem('role');
-    
+
     if (role === 'ADMIN') {
       this.router.navigateByUrl('/principal-administrador');
     } else {
