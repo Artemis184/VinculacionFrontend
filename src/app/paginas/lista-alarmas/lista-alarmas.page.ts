@@ -60,16 +60,10 @@ export class ListaAlarmasPage implements OnInit {
     this.router.navigate(['editar-alarma', id]);
   }
 
-  estadoActiva(a: Alarma) {
-    return a.is_active ? 'Activa' : 'Inactiva';
-  }
   estadoHabilitada(a: Alarma) {
     return a.is_enabled ? 'Habilitada' : 'Deshabilitada';
   }
 
-  colorActiva(a: Alarma) {
-    return a.is_active ? 'success' : 'danger';
-  }
   colorHabilitada(a: Alarma) {
     return a.is_enabled ? 'primary' : 'medium';
   }
