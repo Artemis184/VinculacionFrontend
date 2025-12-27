@@ -188,7 +188,7 @@ export class EditarAlarmaPage implements OnInit {
         rf_address,
         is_active: !!this.alarma.is_active,
         is_enabled: !!this.alarma.is_enabled,
-        installation_image: this.imagenOriginal, // imagen no se guarda
+        installation_image: this.previewImg ?? this.imagenOriginal,
       });
 
       await this.toast(
