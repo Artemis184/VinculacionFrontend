@@ -17,12 +17,13 @@ import {
 
 //SE AGREGO
 import { addIcons } from 'ionicons';
-import { personCircle, menuOutline } from 'ionicons/icons';
+import { personCircle, menuOutline, checkmarkCircle } from 'ionicons/icons';
 
 // ✅ REGISTRA ICONOS (para que <ion-icon name="..."> se vea)
 addIcons({
   'person-circle': personCircle,
   'menu-outline': menuOutline,
+  'checkmark-circle': checkmarkCircle,
 });
 
 bootstrapApplication(AppComponent, {
