@@ -3,7 +3,9 @@ import { CommonModule } from '@angular/common';
 import { IonicModule, PopoverController } from '@ionic/angular';
 
 import { CuentaUsuariF, UsuarioFinal } from '../../servicios/cuenta-usuari-f';
-import { MenUComponent } from '../../componentes/men-u/men-u.component';
+
+import { MainHeaderComponent } from '../../shared/main-header/main-header.component';
+import { AlarmSwitchComponent } from '../../shared/alarm-switch/alarm-switch.component';
 
 @Component({
   selector: 'app-principal-usuariof',
@@ -12,7 +14,11 @@ import { MenUComponent } from '../../componentes/men-u/men-u.component';
   standalone: true,
   imports: [
     CommonModule,
-    IonicModule, // ✅ SOLO ESTO
+    IonicModule,
+
+    // Shared
+    MainHeaderComponent,
+    AlarmSwitchComponent, // 👈 ESTE FALTABA
   ],
 })
 export class PrincipalUsuariofPage implements OnInit {
@@ -23,20 +29,22 @@ export class PrincipalUsuariofPage implements OnInit {
   usuario!: UsuarioFinal;
 
   // 🔔 ALARMA ASIGNADA AL USUARIO (UI)
-  alarma = {
-    id: 1,
-    nombre: 'ALARMA #001',
-    direccion: 'ENTRE LA CALLE XYZ, DIAGONAL A LA CASA',
-    encendida: false,
-    loading: false,
-  };
+  alarmasUsuario = [
+    {
+      id: 1,
+      nombre: 'ALARMA #001',
+      direccion: 'ENTRE LA CALLE XYZ, DIAGONAL A LA CASA',
+      encendida: false,
+      loading: false,
+    },
+  ];
 
   ngOnInit() {
     // Carga del usuario
     this.usuario = this.cuentaService.getUsuario();
 
     // Sincroniza estado UI
-    this.alarma.encendida = this.alarma.encendida;
+    this.alarmasUsuario[0].encendida = this.alarmasUsuario[0].encendida;
 
     // 🔌 FUTURO:
     // cargar alarma desde backend según usuario
@@ -80,7 +88,7 @@ export class PrincipalUsuariofPage implements OnInit {
   // 📂 MENÚ DE USUARIO
   async abrirMenu(ev: any) {
     const popover = await this.popoverCtrl.create({
-      component: MenUComponent,
+      component: MainHeaderComponent,
       event: ev,
       side: 'bottom',
       alignment: 'start',

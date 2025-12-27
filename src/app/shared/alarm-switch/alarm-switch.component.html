@@ -1,0 +1,24 @@
+<ion-card class="alarma-card" *ngFor="let alarma of alarmas">
+  <ion-card-content>
+    <div class="alarma-top">
+      <div>
+        <div class="alarma-nombre">{{ alarma.nombre }}</div>
+        <div class="alarma-dir">{{ alarma.direccion }}</div>
+      </div>
+
+      <div class="estado-text" [class.on]="alarma.encendida">
+        {{ alarma.encendida ? "ENCENDIDO" : "APAGADO" }}
+      </div>
+    </div>
+
+    <div
+      class="switch"
+      [class.on]="alarma.encendida"
+      [class.loading]="alarma.loading"
+      (click)="onToggle(alarma)"
+    >
+      <div class="knob"></div>
+      <div class="spinner" *ngIf="alarma.loading"></div>
+    </div>
+  </ion-card-content>
+</ion-card>

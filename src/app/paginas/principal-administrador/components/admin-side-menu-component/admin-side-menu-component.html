@@ -1,0 +1,49 @@
+<ion-menu
+  side="start"
+  menuId="adminMenu"
+  contentId="main-content"
+  type="overlay"
+>
+  <ion-content class="menu-content">
+    <ion-list lines="none">
+      <ion-menu-toggle autoHide="true">
+        <ion-item
+          button
+          routerLink="/principal-administrador"
+          routerDirection="root"
+        >
+          <ion-label>Home</ion-label>
+        </ion-item>
+      </ion-menu-toggle>
+
+      <ion-menu-toggle autoHide="true">
+        <ion-item
+          button
+          routerLink="/listado-pendientes-acciones"
+          routerDirection="root"
+        >
+          <ion-label>Solicitudes</ion-label>
+          <ion-badge>{{ solicitudesCount }}</ion-badge>
+        </ion-item>
+      </ion-menu-toggle>
+
+      <ion-menu-toggle autoHide="true">
+        <ion-item button routerLink="/listado-usuarios" routerDirection="root">
+          <ion-label>Lista de usuarios</ion-label>
+        </ion-item>
+      </ion-menu-toggle>
+
+      <ion-menu-toggle autoHide="true">
+        <ion-item button routerLink="/lista-alarmas" routerDirection="root">
+          <ion-label>Lista de Alarmas</ion-label>
+        </ion-item>
+      </ion-menu-toggle>
+
+      <ion-menu-toggle autoHide="true">
+        <ion-item button routerLink="/admin-auditoria" routerDirection="root">
+          <ion-label>Auditoría</ion-label>
+        </ion-item>
+      </ion-menu-toggle>
+    </ion-list>
+  </ion-content>
+</ion-menu>

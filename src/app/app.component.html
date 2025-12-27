@@ -1,3 +1,10 @@
 <ion-app>
-  <ion-router-outlet></ion-router-outlet>
+  <!-- MENÚ SOLO ADMIN -->
+  <app-admin-side-menu
+    *ngIf="isAdmin"
+    [solicitudesCount]="solicitudesCount"
+  ></app-admin-side-menu>
+
+  <!-- CONTENIDO PRINCIPAL -->
+  <ion-router-outlet id="main-content"></ion-router-outlet>
 </ion-app>
