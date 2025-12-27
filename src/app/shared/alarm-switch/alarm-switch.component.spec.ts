@@ -9,8 +9,8 @@ describe('AlarmSwitchComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ AlarmSwitchComponent ],
-      imports: [IonicModule.forRoot()]
+      declarations: [AlarmSwitchComponent],
+      imports: [IonicModule.forRoot()],
     }).compileComponents();
 
     fixture = TestBed.createComponent(AlarmSwitchComponent);

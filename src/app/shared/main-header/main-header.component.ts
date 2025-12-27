@@ -1,4 +1,5 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, inject } from '@angular/core';
+import { Router } from '@angular/router';
 import {
   IonHeader,
   IonToolbar,
@@ -39,17 +40,35 @@ export class MainHeaderComponent {
   /** Control popup usuario */
   userMenuOpen = false;
 
+  /** Router para navegación */
+  private router = inject(Router);
+
   toggleUserMenu() {
     this.userMenuOpen = !this.userMenuOpen;
   }
 
   verCuenta() {
     this.userMenuOpen = false;
-    alert('Cuenta');
+    this.router.navigateByUrl('/datos-usuario-f');
+  }
+
+  goHome() {
+    this.userMenuOpen = false;
+    const role = localStorage.getItem('role');
+    
+    if (role === 'ADMIN') {
+      this.router.navigateByUrl('/principal-administrador');
+    } else {
+      this.router.navigateByUrl('/principal-usuariof');
+    }
   }
 
   logout() {
     this.userMenuOpen = false;
-    alert('Logout');
+    // Limpiar datos de sesión
+    localStorage.removeItem('role');
+    localStorage.removeItem('token');
+    // Redirigir al login u home
+    this.router.navigateByUrl('/login');
   }
 }

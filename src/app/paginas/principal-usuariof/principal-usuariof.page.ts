@@ -4,7 +4,6 @@ import { IonicModule, PopoverController } from '@ionic/angular';
 
 import { CuentaUsuariF, UsuarioFinal } from '../../servicios/cuenta-usuari-f';
 
-
 import { MainHeaderComponent } from '../../shared/main-header/main-header.component';
 import { AlarmSwitchComponent } from '../../shared/alarm-switch/alarm-switch.component';
 
@@ -19,9 +18,8 @@ import { AlarmSwitchComponent } from '../../shared/alarm-switch/alarm-switch.com
 
     // Shared
     MainHeaderComponent,
-    AlarmSwitchComponent,   // 👈 ESTE FALTABA
+    AlarmSwitchComponent, // 👈 ESTE FALTABA
   ],
-
 })
 export class PrincipalUsuariofPage implements OnInit {
   // 🔥 INYECCIÓN MODERNA
@@ -40,7 +38,6 @@ export class PrincipalUsuariofPage implements OnInit {
       loading: false,
     },
   ];
-
 
   ngOnInit() {
     // Carga del usuario

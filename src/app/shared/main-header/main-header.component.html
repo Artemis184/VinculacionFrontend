@@ -2,7 +2,8 @@
   <ion-toolbar>
     <!-- ☰ MENU -->
     <ion-buttons slot="start" *ngIf="showMenu">
-      <ion-menu-button></ion-menu-button>
+      <!-- Asegura que abra el menú admin específico -->
+      <ion-menu-button menu="adminMenu"></ion-menu-button>
     </ion-buttons>
 
     <!-- TITULO -->
@@ -21,6 +22,10 @@
 
 <!-- ✅ POPUP FUERA DEL HEADER -->
 <div class="account-popup" *ngIf="userMenuOpen">
+  <button class="account-item" (click)="goHome()">
+    <span>Inicio</span>
+  </button>
+
   <button class="account-item" (click)="verCuenta()">
     <span>Cuenta</span>
   </button>

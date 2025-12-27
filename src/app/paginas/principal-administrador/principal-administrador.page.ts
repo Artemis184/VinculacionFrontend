@@ -1,34 +1,30 @@
 import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
-import {
-  IonContent,
-} from '@ionic/angular/standalone';
-
+import { IonContent } from '@ionic/angular/standalone';
 
 import { MainHeaderComponent } from '../../shared/main-header/main-header.component';
 import { AlarmSwitchComponent } from '../../shared/alarm-switch/alarm-switch.component';
-import { AdminSideMenuComponent } from './components/admin-side-menu-component/admin-side-menu-component.component';
+import { AdminSideMenuComponent } from './components/admin-side-menu-component/admin-side-menu-component';
 
 @Component({
   standalone: true,
   selector: 'app-principal-administrador',
   templateUrl: './principal-administrador.page.html',
   styleUrls: ['./principal-administrador.page.scss'],
-imports: [
-  CommonModule,
+  imports: [
+    CommonModule,
 
-  // Ionic
-  IonContent,
+    // Ionic
+    IonContent,
 
-  // Shared
-  MainHeaderComponent,
-  AlarmSwitchComponent,
+    // Shared
+    MainHeaderComponent,
+    AlarmSwitchComponent,
 
-  // Admin only
-  AdminSideMenuComponent,
-],
-
+    // Admin only
+    AdminSideMenuComponent,
+  ],
 })
 export class PrincipalAdministradorPage {
   private router = inject(Router);
@@ -96,20 +92,19 @@ export class PrincipalAdministradorPage {
   /* =========================
      TOGGLE ALARMA (SIMULA BACKEND)
   ========================= */
-async toggleAlarma(alarma: any) {
-  if (alarma.loading) return;
+  async toggleAlarma(alarma: any) {
+    if (alarma.loading) return;
 
-  alarma.loading = true;
+    alarma.loading = true;
 
-  try {
-    const nuevoEstado = !alarma.encendida;
-    await this.simularBackend();
-    alarma.encendida = nuevoEstado;
-  } finally {
-    alarma.loading = false;
+    try {
+      const nuevoEstado = !alarma.encendida;
+      await this.simularBackend();
+      alarma.encendida = nuevoEstado;
+    } finally {
+      alarma.loading = false;
+    }
   }
-}
-
 
   /* =========================
      SIMULACIÓN BACKEND

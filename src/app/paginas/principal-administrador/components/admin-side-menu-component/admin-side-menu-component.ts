@@ -1,6 +1,7 @@
 import { Component, Input, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
+import { RouterLink } from '@angular/router';
 
 import {
   IonMenu,
@@ -15,10 +16,15 @@ import {
 @Component({
   standalone: true,
   selector: 'app-admin-side-menu',
-  templateUrl: './admin-side-menu-component.component.html',
-  styleUrls: ['./admin-side-menu-component.component.scss'],
+  templateUrl: './admin-side-menu-component.html',
+  styleUrls: ['./admin-side-menu-component.scss'],
   imports: [
     CommonModule,
+
+    // Angular Router
+    RouterLink, // 👈 ESTE FALTABA
+
+    // Ionic
     IonMenu,
     IonContent,
     IonList,
@@ -29,23 +35,5 @@ import {
   ],
 })
 export class AdminSideMenuComponent {
-  private router = inject(Router);
-
   @Input() solicitudesCount = 0;
-
-  goSolicitudes() {
-    this.router.navigate(['listado-pendientes-acciones']);
-  }
-
-  goUsuarios() {
-    alert('Lista de usuarios finales');
-  }
-
-  goAlarmas() {
-    this.router.navigate(['lista-alarmas']);
-  }
-
-  goAuditoria() {
-    this.router.navigate(['admin-auditoria']);
-  }
 }

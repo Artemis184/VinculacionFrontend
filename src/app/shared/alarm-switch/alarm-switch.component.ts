@@ -1,9 +1,6 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {
-  IonCard,
-  IonCardContent,
-} from '@ionic/angular/standalone';
+import { IonCard, IonCardContent } from '@ionic/angular/standalone';
 
 export interface AlarmaUI {
   id: number;
@@ -18,21 +15,17 @@ export interface AlarmaUI {
   selector: 'app-alarm-switch',
   templateUrl: './alarm-switch.component.html',
   styleUrls: ['./alarm-switch.component.scss'],
-  imports: [
-    CommonModule,
-    IonCard,
-    IonCardContent,
-  ],
+  imports: [CommonModule, IonCard, IonCardContent],
 })
 export class AlarmSwitchComponent {
   /** Lista de alarmas */
   @Input() alarmas: AlarmaUI[] = [];
 
   /** Evento cuando se quiere cambiar estado */
-  @Output() toggle = new EventEmitter<AlarmaUI>();
+  @Output() alarmToggle = new EventEmitter<AlarmaUI>();
 
   onToggle(alarma: AlarmaUI) {
     if (alarma.loading) return;
-    this.toggle.emit(alarma);
+    this.alarmToggle.emit(alarma);
   }
 }

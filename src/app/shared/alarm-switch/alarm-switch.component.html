@@ -1,7 +1,4 @@
-<ion-card
-  class="alarma-card"
-  *ngFor="let alarma of alarmas"
->
+<ion-card class="alarma-card" *ngFor="let alarma of alarmas">
   <ion-card-content>
     <div class="alarma-top">
       <div>
@@ -10,7 +7,7 @@
       </div>
 
       <div class="estado-text" [class.on]="alarma.encendida">
-        {{ alarma.encendida ? 'ENCENDIDO' : 'APAGADO' }}
+        {{ alarma.encendida ? "ENCENDIDO" : "APAGADO" }}
       </div>
     </div>
 
