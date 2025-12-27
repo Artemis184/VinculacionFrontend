@@ -12,10 +12,6 @@
     <ion-card class="card">
       <!-- ESTADOS visibles -->
       <div class="status-row">
-        <ion-chip [color]="colorActiva()">
-          <ion-label>{{ textoActiva() }}</ion-label>
-        </ion-chip>
-
         <ion-chip [color]="colorHabilitada()">
           <ion-label>{{ textoHabilitada() }}</ion-label>
         </ion-chip>
@@ -75,14 +71,6 @@
       </ion-item>
 
       <!-- TOGGLES con texto -->
-      <ion-item>
-        <ion-label>Activa</ion-label>
-        <ion-toggle [(ngModel)]="alarma.is_active"></ion-toggle>
-        <ion-badge slot="end" [color]="colorActiva()"
-          >{{ textoActiva() }}</ion-badge
-        >
-      </ion-item>
-
       <ion-item>
         <ion-label>Habilitada</ion-label>
         <ion-toggle [(ngModel)]="alarma.is_enabled"></ion-toggle>
